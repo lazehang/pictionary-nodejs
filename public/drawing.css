@@ -1,0 +1,54 @@
+.draw{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+#color-picker {
+    border: 3px #0F98CA solid;
+    height: 488px;
+    width: 200px;
+    background-color: #E2E2E3;
+}
+
+.color {
+    font-size: 35px;
+}
+
+.canvas {
+    border: 3px #0F98CA solid;
+    background-color: white;
+    opacity: 1;
+    height: 488px;
+    width: 706px;
+    position: absolute;
+}
+
+#canvas-real {
+    border: 3px #0F98CA solid;
+}
+
+#canvas-draft {
+    border: 3px rgb(233, 25, 25) solid;
+    background-color: transparent;
+}
+
+canvas:hover {
+    cursor: crosshair;
+}
+
+
+#ranking {
+    border: 3px #0F98CA solid;
+    width: 200px;
+    height: 241px;
+}
+
+#chatroom {
+    border: 3px #0F98CA solid;
+    width: 200px;
+    height: 241px;
+}
+
+
+
