@@ -1,0 +1,69 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="rmBtn">
+        <button class="joinRm">rma</button>
+        <button class="joinRm">rmb</button>
+    </div>
+    <form action="/logout" method="get" id="logout">
+        <button type="submit">LOGOUT</button>
+    </form>
+
+    <ul id="messages"></ul>
+
+    <form action="" id="msgBox" class="hide">
+        <input id="m" autocomplete="off" />
+        <button>Send</button>
+    </form>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.slim.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+
+            var socket = io();
+            $("#rmBtn").on('click', ".joinRm", function () {
+                $("#msgBox").removeClass("hide");
+                socket.emit('leaveRm', "leaveRm");
+                let rm = $(this).html();
+                console.log(rm)
+                socket.emit('subscribe', rm);
+            });
+
+            socket.on('join room', function (msg) {
+                $('#messages').empty();
+                $('#messages').append($('<li>').text(msg));
+            });
+
+            $('#msgBox').submit(function () {
+                socket.emit('chat message', $('#m').val());
+                console.log($('#m').val());
+                $('#m').val('');
+                return false;
+            });
+
+            socket.on('chat message', function (msg) {
+                console.log(`received: ${msg}`);
+                let display = `${msg.user} : ${msg.msg}`;
+                $('#messages').append($('<li>').text(display));
+            });
+
+            socket.on('old message', function (msg) {
+                console.log(`received old msg: ${msg}`)
+                msg.forEach(element => {
+                    let parsed = JSON.parse(element);
+                    let text = `${parsed.user} : ${parsed.msg}`;
+                    $('#messages').append($('<li>').text(text));
+                });
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>
