@@ -1,6 +1,8 @@
 //router.js
 const passport = require('passport');
+
 const SocketRouter = require("./socketRouter");
+var socketRouterList = {};
 
 module.exports = (express, app, io) => {
     const router = express.Router();
