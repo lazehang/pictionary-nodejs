@@ -9,13 +9,16 @@ app.use(express.static('public'));
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 
+// handlebars
+const hb = require('express-handlebars');
+app.engine('handlebars', hb({ defaultLayout: 'main' }));
+app.set('view engine', 'handlebars');
+
 // redis connection
 const expressSession = require('express-session');
 const redis = require("redis");
 const RedisStore = require('connect-redis')(expressSession);
 const socketIOSession = require("socket.io.session");
-
-const hb = require('express-handlebars');
 console.log("redis-connection");
 
 const redisClient = redis.createClient({
@@ -34,32 +37,27 @@ const settings = {
     cookie: { "path": '/', "httpOnly": true, "secure": false, "maxAge": null },
     resave: false,
     saveUninitialized: true
-        // maxAge : 10 * 60 * 1000 ms
+    // maxAge : 10 * 60 * 1000 ms
 };
 
-redisClient.on("error", function(err) {
+redisClient.on("error", function (err) {
     console.log(`REDIS: ${err}`);
 });
 
 app.use(expressSession(settings));
 io.use(socketIOSession(settings).parser);
 
-app.engine('handlebars', hb({ defaultLayout: 'main' }));
-app.set('view engine', 'handlebars');
-
 // passport
 console.log("passport.js");
 const passport = require("./passport")(app);
 
 // for create socketRouter in router.js
-// module.exports.io = io;
-// module.exports.redisClient = redisClient;
 const SocketRouter = require("./routes/socketRouter");
 const socketRouter = new SocketRouter(io, redisClient);
 socketRouter.router();
 
 // routing
-
+console.log("router.js");
 const router = require('./routes/appRouter')(express, app, io);
 app.use("/", router);
 

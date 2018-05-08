@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Chalkboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" integrity="sha384-v2Tw72dyUXeU3y4aM2Y0tBJQkGfplr39mxZqlTBDUZAb9BGoC40+rdFCG0m10lXk"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="./drawing.css">
+</head>
+
+<body>
+
+    <div class="draw">
+        <div class="room">
+            <div class="upper">
+                <div>
+                    
+                    <div id="canvas-container">
+                        <canvas id="canvas-real" class="canvas" width='706px' height='488px'></canvas>
+                        <canvas id="chalkboard" class="canvas" width='706px' height='488px'></canvas>
+                    </div>
+
+                </div>
+
+                <div>
+
+                    <div id="ranking">
+                        <p>ranking</p>
+                    </div>
+
+                    <div id="chatroom">
+                        <p>chatroom</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div>
+                <div id="color-picker">
+
+                    <i class="fas fa-circle" id="small" style="padding: 5px; font-size: 20px; padding:15px 10px 10px 20px;"></i>
+                    <i class="fas fa-circle" id="big" style="padding: 5px; font-size: 30px; padding: 10px 10px 0px 10px;"></i>
+                    <!-- <i class="fas fa-pencil-alt" style="padding: 5px; font-size: 50px;"></i> -->
+
+                    <i class="fas fa-minus" id="red" style="color: red;"></i>
+                    <i class="fas fa-minus" id="orange" style="color: orange;"></i>
+                    <i class="fas fa-minus" id="yellow" style="color: yellow;"></i>
+
+                    <i class="fas fa-minus" id="brown" style="color: #663300;"></i>
+                    <i class="fas fa-minus" id="green" style="color: #00CC00;"></i>
+                    <!-- <i class="fas fa-minus" id="dark-green" style="color: #006600; padding: 3px;"></i> -->
+
+                    <i class="fas fa-minus" id="light-blue" style="color: #73CFFA;"></i>
+                    <i class="fas fa-minus" id="blue" style="color: #0366CC;"></i>
+                    <!-- <i class="fas fa-minus" id="light-purple" style="color: #CC00CC; padding: 3px;"></i> -->
+
+                    <i class="fas fa-minus" id="light-red" style="color: #FF6666;"></i>
+                    <i class="fas fa-minus" id="purple" style="color: purple;"></i>
+                    <i class="fas fa-minus" id="lighter-purple" style="color: #FF40FF;"></i>
+
+                    <i class="fas fa-minus" id="black" style="color: black;"></i>
+                    <i class="fas fa-minus" id="white" style="color: white;"></i>
+                    <i class="fas fa-minus" id="grey" style="color: #919499;"></i>
+
+                    <!-- <i class="fas fa-undo" style="padding: 8px; font-size: 30px;"></i> -->
+                    <i id="duster" style="padding-left: 20px;">
+                        <img src="./images/duster.png" height="35" width="80">
+                    </i>
+                    <!-- <i class="fas fa-trash-alt" style="padding: 8px; font-size: 30px;"></i> -->
+
+                    <!-- <i class="fas fa-square-full" style="padding: 8px; font-size: 30px;"></i> -->
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script type='text/javascript' src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+    <script type='text/javascript' src="./js/canvas-common.js"></script>
+    <!-- <script type='text/javascript' src="./tools/red.js"></script>
+    <script type='text/javascript' src="./tools/orange.js"></script>
+    <script type='text/javascript' src="./tools/yellow.js"></script>
+    <script type='text/javascript' src="./tools/brown.js"></script>
+    <script type='text/javascript' src="./tools/green.js"></script>
+    <script type='text/javascript' src="./tools/dark-green.js"></script>
+    <script type='text/javascript' src="./tools/light-blue.js"></script>
+    <script type='text/javascript' src="./tools/blue.js"></script>
+    <script type='text/javascript' src="./tools/light-purple.js"></script>
+    <script type='text/javascript' src="./tools/light-red.js"></script>
+    <script type='text/javascript' src="./tools/purple.js"></script>
+    <script type='text/javascript' src="./tools/lighter-purple.js"></script>
+    <script type='text/javascript' src="./tools/black.js"></script>
+    <script type='text/javascript' src="./tools/white.js"></script>
+    <script type='text/javascript' src="./tools/grey.js"></script> -->
+    <script type='text/javascript'>
+        // $("#red").click(function () {
+        //     rgbaColor = 'rgba(255,0,0,1)';
+        // })
+        // $('#red').click(() => {
+        //     currentFunction = new Red(contextReal, contextDraft);
+        // });
+        // $('#orange').click(() => {
+        //     currentFunction = new Orange(contextReal, contextDraft);
+        // });
+        // $('#yellow').click(() => {
+        //     currentFunction = new Yellow(contextReal, contextDraft);
+        // });
+        // $('#brown').click(() => {
+        //     currentFunction = new Brown(contextReal, contextDraft);
+        // });
+        // $('#green').click(() => {
+        //     currentFunction = new Green(contextReal, contextDraft);
+        // });
+        // $('#dark-green').click(() => {
+        //     currentFunction = new DarkGreen(contextReal, contextDraft);
+        // });
+        // $('#light-blue').click(() => {
+        //     currentFunction = new LightBlue(contextReal, contextDraft);
+        // });
+        // $('#blue').click(() => {
+        //     currentFunction = new Blue(contextReal, contextDraft);
+        // });
+        // $('#light-purple').click(() => {
+        //     currentFunction = new LightPurple(contextReal, contextDraft);
+        // });
+        // $('#light-red').click(() => {
+        //     currentFunction = new LightRed(contextReal, contextDraft);
+        // });
+        // $('#purple').click(() => {
+        //     currentFunction = new Purple(contextReal, contextDraft);
+        // });
+        // $('#lighter-purple').click(() => {
+        //     currentFunction = new LighterPurple(contextReal, contextDraft);
+        // });
+        // $('#black').click(() => {
+        //     currentFunction = new Black(contextReal, contextDraft);
+        // });
+        // $('#white').click(() => {
+        //     currentFunction = new White(contextReal, contextDraft);
+        // });
+        // $('#grey').click(() => {
+        //     currentFunction = new Grey(contextReal, contextDraft);
+        // });
+
+        // currentFunction = new Black(contextReal, contextDraft);
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<div class="draw">
+    <div class="room">
+        <div class="upper">
+            <div>
+
+                <div id="canvas-container">
+                    <canvas id="canvas-real" class="canvas" width='706px' height='488px'></canvas>
+                    <canvas id="chalkboard" class="canvas" width='706px' height='488px'></canvas>
+                    <canvas id="canvas-cover" class="canvas" width='706px' height='488px'></canvas>
+                </div>
+
+            </div>
+
+            <div>
+
+                <div id="ranking">
+                    <p id="keyword"></p>
+                    <p>ranking</p>
+                </div>
+
+                <div id="chatroom">
+                    <p>chatroom</p>
+                    <form action="" id="msgBox" class="">
+                        <input id="m" autocomplete="off" placeholder="guess"/>
+                        <button>Send</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <div>
+            <div id="color-picker">
+
+                <i class="fas fa-circle" id="small" style="padding: 5px; font-size: 20px; padding:15px 10px 10px 20px;"></i>
+                <i class="fas fa-circle" id="big" style="padding: 5px; font-size: 30px; padding: 10px 10px 0px 10px;"></i>
+                <!-- <i class="fas fa-pencil-alt" style="padding: 5px; font-size: 50px;"></i> -->
+
+                <i class="fas fa-minus" id="red" style="color: red;"></i>
+                <i class="fas fa-minus" id="orange" style="color: orange;"></i>
+                <i class="fas fa-minus" id="yellow" style="color: yellow;"></i>
+
+                <i class="fas fa-minus" id="brown" style="color: #663300;"></i>
+                <i class="fas fa-minus" id="green" style="color: #00CC00;"></i>
+                <!-- <i class="fas fa-minus" id="dark-green" style="color: #006600; padding: 3px;"></i> -->
+
+                <i class="fas fa-minus" id="light-blue" style="color: #73CFFA;"></i>
+                <i class="fas fa-minus" id="blue" style="color: #0366CC;"></i>
+                <!-- <i class="fas fa-minus" id="light-purple" style="color: #CC00CC; padding: 3px;"></i> -->
+
+                <i class="fas fa-minus" id="light-red" style="color: #FF6666;"></i>
+                <i class="fas fa-minus" id="purple" style="color: purple;"></i>
+                <i class="fas fa-minus" id="lighter-purple" style="color: #FF40FF;"></i>
+
+                <i class="fas fa-minus" id="black" style="color: black;"></i>
+                <i class="fas fa-minus" id="white" style="color: white;"></i>
+                <i class="fas fa-minus" id="grey" style="color: #919499;"></i>
+
+
+                <i id="duster" style="padding-left: 20px;">
+                    <img src="./images/duster.png" height="35" width="80">
+                </i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/room.js"></script>

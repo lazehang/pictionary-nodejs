@@ -19,12 +19,16 @@
 <<<<<<< 2d4b89c0b32db15a937cfa2e368dfe93eab5af14
 <<<<<<< c0cb9e5497b03e91691146933045ef31db7b8779
     "knex": "^0.14.6",
+<<<<<<< 8ce100002587e8e480136e5f9f615f6e51e3a035
 =======
     "nanoid": "^1.0.2",
 >>>>>>> rc
 =======
     "knex": "^0.14.6",
 >>>>>>> login added to socket io
+=======
+    "nanoid": "^1.0.2",
+>>>>>>> room mirror action ok
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1",
     "passport-local": "^1.0.0",

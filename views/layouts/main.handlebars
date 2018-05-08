@@ -10,9 +10,15 @@
 
     <title>Pictionary.io</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-    <link href="main.css" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" integrity="sha384-v2Tw72dyUXeU3y4aM2Y0tBJQkGfplr39mxZqlTBDUZAb9BGoC40+rdFCG0m10lXk"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P"
+        crossorigin="anonymous">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/drawing.css" rel="stylesheet">
 </head>
 
 <body>
@@ -23,109 +29,51 @@
             </a>
             <i></i>
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-		    <span class="navbar-toggler-icon"></span>
-		  </button>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        {{#if isLoggedIn }}
-                            <a class="nav-link disabled" href="/logout">logout</a>
-                        {{/if}}
-
+                        {{!--
+                        <a class="nav-link disabled" href="#login">SignIn/login</a> --}}
                     </li>
                 </ul>
             </div>
         </nav>
     </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.slim.js"></script>
 
     {{{body}}}
 
     <!-- JQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.slim.js"></script>
-    
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.6.8-fix/jquery.nicescroll.min.js"></script>
-    
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.6.8-fix/jquery.nicescroll.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+
+    <script src="js/socketEvent.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+    {{!-- room page only --}}
+    {{!-- <script src="canvas-common.js"></script> --}}
 
     <script>
         $(function () {
 
             $('.chat').niceScroll();
 
-            var socket = io();
-            $("#rmBtn").on('click', ".joinRm", function () {
-                $(".chat-body").removeClass("hide");
-                socket.emit('leaveRm', "leaveRm");
-                let rm = $(this).html();
-                console.log(rm)
-                socket.emit('subscribe', rm);
-            });
-
-            $('#leave-room').on('click', function() {
-                socket.emit('leaveRm', 'leaveRm');
-                $(".chat-body").addClass("hide");
-            })
-
-            socket.on('join room', function (msg) {
-                $('#chat-messages').empty();
-                $('#chat-messages').append(`<div class="answer left">
-                <div class="avatar">
-                  <img src="https://pbs.twimg.com/profile_images/378800000432816237/7d7e912287eae6baec89463e4babbb84_400x400.jpeg" alt="">
-                  <div class="status online"></div>
-                </div>
-                <div class="text">
-                  ${msg}
-                </div>
-              </div>`);
-            });
-
-            $('#send-message').click(function () {
-                socket.emit('chat message', $('#m').val());
-                console.log($('#m').val());
-                $('#m').val('');
-                return false;
-            });
-
-            socket.on('chat message', function (msg) {
-                console.log(`received: ${msg}`);
-                $('#chat-messages').append(`<div class="answer left">
-                <div class="avatar">
-                  <img src="https://pbs.twimg.com/profile_images/378800000432816237/7d7e912287eae6baec89463e4babbb84_400x400.jpeg" alt="">
-                  <div class="status online"></div>
-                </div>
-                <div class="name">${msg.user}</div>
-                <div class="text">
-                  ${msg.msg}
-                </div>
-              </div>`);
-            });
-
-            socket.on('old message', function (msg) {
-                console.log(`received old msg: ${msg}`)
-                msg.forEach(element => {
-                    let parsed = JSON.parse(element);
-                    $('#chat-messages').append(`
-                    <div class="answer left">
-                        <div class="avatar">
-                        <img src="https://pbs.twimg.com/profile_images/378800000432816237/7d7e912287eae6baec89463e4babbb84_400x400.jpeg" alt="">
-                        <div class="status offline"></div>
-                        </div>
-                        <div class="name">${parsed.user}</div>
-                        <div class="text">
-                        ${parsed.msg}
-                        </div>
-                    </div>`);
-                });
-
-                 $('.chat').scrollTop($('.chat').get(0).scrollHeight, -1);
-            });
+            $('.chat').scrollTop($('.chat').get(0).scrollHeight, -1);
 
         });
 
-       
     </script>
 </body>
 

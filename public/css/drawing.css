@@ -1,0 +1,78 @@
+#color-picker {
+    height: 70px;
+    width: 906px;
+    /* background-color: #CC6600; */
+    display: flex;
+    flex-direction: row;
+    font-size: 30px;
+}
+
+.canvas {
+    border-right: 3px white solid;
+    /* background-color: #33655A; */
+    /* background-image: url("./images/chalkboard.jpg"); */
+    opacity: 1;
+    position: absolute;
+    cursor: url(../images/chalk.png), auto;
+    z-index: 2;
+}
+
+#canvas-real {
+    border-right: 3px white solid;
+    background-image: url("../images/chalkboard.jpg");
+    z-index: 2;
+}
+
+#chalkboard {
+    border-right: 3px white solid;
+    background-color: transparent;
+}
+
+#canvas-container {
+    display: relative;
+}
+
+#ranking {
+    border-left: 3px white solid;
+    border-bottom: 3px white solid;
+    /* background-color: #33655A; */
+    background-image: url("../images/chalkboard.jpg");
+    width: 200px;
+    height: 241px;
+    margin-left: 706px;
+    display: absolute;
+}
+
+#chatroom {
+    border-left: 3px white solid;
+    border-top: 3px white solid;
+    /* background-color: #33655A; */
+    background-image: url("../images/chalkboard.jpg");
+    width: 200px;
+    height: 247px;
+    margin-left: 706px;
+    display: absolute;
+    color: white;
+}
+
+
+.fa-minus {
+    transform: rotate(45deg);
+    font-size: 1.5em;
+    padding: 0px 8px 0px 8px;
+    margin: 0px;
+    border: 0px;
+}
+
+.room {
+    width: 1001px;
+    height: 583px;
+    background-image: url("../images/wood.jpg");
+    background-size: 1001px 583px;
+}
+
+#canvas-cover {
+    border-right: 3px white solid;
+    background-color: transparent;
+    z-index: -1;
+}

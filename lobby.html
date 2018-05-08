@@ -6,6 +6,7 @@
 
 <body>
     <form id="create" method="POST" action="/room">
+        <input id="customName" type="text" name="customName">customName<br>
         <input id="privateRoom" type="checkbox" name="private">Private<br>
         <input id="password" type="text" name="password" placeholder="password">Password<br>
         <input id="createRoom" type="submit">CREATE ROOM</input>
@@ -24,15 +25,8 @@
         <button type="submit">TEST</button>
     </form>
 
-    <!-- <ul id="messages"></ul>
-
-    <form action="" id="msgBox" class="hide">
-        <input id="m" autocomplete="off" />
-        <button>Send</button>
-    </form> -->
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.slim.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.slim.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
     <script>
         $(function () {
 

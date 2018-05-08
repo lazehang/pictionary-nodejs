@@ -4,7 +4,7 @@ const passport = require('passport');
 const SocketRouter = require("./socketRouter");
 var socketRouterList = {};
 
-module.exports = (express, app, io) => {
+module.exports = (express, app) => {
     const router = express.Router();
 
     function isLoggedIn(req, res, next) {
@@ -53,13 +53,17 @@ module.exports = (express, app, io) => {
         });
     });
 
-    router.get('/error', (req, res) => {
-        res.send('You are not logged in!');
-    });
+    router.post("/room", (req, res) => {
+        res.render("room");
+    })
 
     router.get('/logout', (req, res) => {
         req.logout();
         res.redirect('/');
+    });
+    
+    router.get('/error', (req, res) => {
+        res.send('You are not logged in!');
     });
 
     return router;

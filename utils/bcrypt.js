@@ -1,6 +1,6 @@
 //bcrypt.js
 
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcrypt');
 
 module.exports.hashPassword = (plainTextPassword) => {
     return new Promise((resolve, reject) => {
