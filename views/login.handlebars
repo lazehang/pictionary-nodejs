@@ -1,0 +1,76 @@
+<section id="index">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="intro" style="float: right;margin-top: 50%;">
+                        <article style="text-align: right">
+                            <h1>Draw To Play</h1>
+                            <i>pictionary</i>
+                            <h2>Fun Explore</h2>
+                            <h5>Challenge your friends</h5>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="login-page">
+                        <div class="form">
+                            <form class="login-form" method="POST" action="/login">
+                                <h2>Login</h2>
+                                <input type="text" name="username" placeholder="username" />
+                                <input type="password" name="password" placeholder="password" />
+                                <button>login</button>
+                                <a href="/auth/facebook" >facebook</a>
+                                <p class="message">Not registered? <a href="#" data-toggle="modal" data-target="#exampleModal" data-toggle="modal" data-target="#exampleModal">Create an account</a></p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Register</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="/signup" method="POST">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Full Name</label>
+                                        <input type="text" class="form-control" name="name" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Username">
+                                        {{!-- <small id="emailHelp" class="form-text text-muted">We'll never share your use with anyone else.</small> --}}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Username</label>
+                                        <input type="text" class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Username">
+                                        {{!-- <small id="emailHelp" class="form-text text-muted">We'll never share your use with anyone else.</small> --}}
+                                    </div>
+                                    {{!-- <div class="form-group">
+                                        <label for="exampleInputEmail1">Full Name</label>
+                                        <input type="text" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp" placeholder="Full Name">
+                                    </div> --}}
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Password</label>
+                                        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+
+                            </div>
+                            <!-- <div class="modal-footer">
+					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					        <button type="button" class="btn btn-primary">Save changes</button>
+					      </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
