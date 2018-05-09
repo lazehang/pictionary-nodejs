@@ -100,3 +100,14 @@ fill bg
 eraser
 clear
 pen x3
+
+
+lobby :
+
+    check box for public/private room
+    text box for password if private room
+    create btn for submit
+
+js
+    socket on createRoom
+

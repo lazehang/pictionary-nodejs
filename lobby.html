@@ -5,20 +5,29 @@
 </head>
 
 <body>
-    <div id="rmBtn">
-        <button class="joinRm">rma</button>
-        <button class="joinRm">rmb</button>
+    <div id="create">
+        <input id="privateRoom" type="checkbox">
+        <span>Private</span>
+        <input id="password" type="text" placeholder="password">
+        <span>Password</span>
+        <button id="createRoom">CREATE ROOM</button>
     </div>
+
+    <div id="join">
+        <button class="joinRoom" data-roomID="someIDA">rma</button>
+        <button class="joinRoom" data-roomID="someIDB">rmb</button>
+    </div>
+
     <form action="/logout" method="get" id="logout">
         <button type="submit">LOGOUT</button>
     </form>
 
-    <ul id="messages"></ul>
+    <!-- <ul id="messages"></ul>
 
     <form action="" id="msgBox" class="hide">
         <input id="m" autocomplete="off" />
         <button>Send</button>
-    </form>
+    </form> -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.slim.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -26,39 +35,53 @@
         $(function () {
 
             var socket = io();
-            $("#rmBtn").on('click', ".joinRm", function () {
-                $("#msgBox").removeClass("hide");
-                socket.emit('leaveRm', "leaveRm");
-                let rm = $(this).html();
-                console.log(rm)
-                socket.emit('subscribe', rm);
+
+            $("#createRoom").on("click", function () {
+                // boolean
+                let private = $("#privateRoom").attr("checked");
+                // string or null
+                let password = $("#password").value() || null;
+                // replace above line with wtever u need
+                // as long as i get the 2 value
+
+                // ask server to create a new room
+                let settings = {
+                    private: private,
+                    password: password
+                };
+                socket.emit("create room", settings)
+
             });
 
-            socket.on('join room', function (msg) {
-                $('#messages').empty();
-                $('#messages').append($('<li>').text(msg));
-            });
+            socket.on("room created", function (gameObject) {
+                // server created new room, go to that room
+                // room ID comes as data.roomID
 
-            $('#msgBox').submit(function () {
-                socket.emit('chat message', $('#m').val());
-                console.log($('#m').val());
-                $('#m').val('');
-                return false;
-            });
-
-            socket.on('chat message', function (msg) {
-                console.log(`received: ${msg}`);
-                let display = `${msg.user} : ${msg.msg}`;
-                $('#messages').append($('<li>').text(display));
-            });
-
-            socket.on('old message', function (msg) {
-                console.log(`received old msg: ${msg}`)
-                msg.forEach(element => {
-                    let parsed = JSON.parse(element);
-                    let text = `${parsed.user} : ${parsed.msg}`;
-                    $('#messages').append($('<li>').text(text));
+                $.ajax({
+                    method: "get",
+                    url: "/room",
+                    data: gameObject
+                })
+                .done(res => {
+                    $("document").html(res.file);
+                })
+                .fail( err => {
+                    console.log(err);
                 });
+
+            });
+
+            $("#join").on('click', ".joinRoom", function () {
+                // vvv as long as i get the unique ID of that room
+                let roomID = $(this).data("roomID");
+                console.log(roomID);
+
+                socket.emit('join room', roomID);
+
+            });
+
+            socket.on("error", msg => {
+                alert(msg);
             });
 
         });

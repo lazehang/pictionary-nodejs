@@ -1,0 +1,67 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- <div id="rmBtn">
+        
+    </div> -->
+
+    <div>Player A and B are in this Room</div>
+    <div>CANVAS</div>
+
+    <div>
+        <ul id="messages"></ul>
+    
+        <form action="" id="msgBox" class="hide">
+            <input id="m" autocomplete="off" />
+            <button>Send</button>
+        </form>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.slim.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+
+            var socket = io();
+
+            // Room event
+            socket.on('player joining', data => {
+                // some how display data.user join data.roomID
+            });
+
+            socket.on("game destroyed", roomID => {
+                // redir to lobby
+            });
+
+            // Guess event
+            $('#msgBox').submit( () => {
+                socket.emit('submit guess', $('#m').val());
+                console.log($('#m').val());
+                $('#m').val('');
+                return false;
+            });
+
+            socket.on('display guesses', guessBlock => {
+                console.log(`received: ${guessBlock}`);
+                let display = `${guessBlock.user} : ${guessBlock.guess}`;
+                $('#messages').append($('<li>').text(display));
+            });
+
+            // Draw event
+
+
+            // handle error
+            socket.on("error", msg => {
+                alert(msg);
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>

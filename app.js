@@ -52,9 +52,7 @@ console.log("passport.js");
 const passport = require("./passport")(app);
 
 // for create socketRouter in router.js
-// module.exports.io = io;
-// module.exports.redisClient = redisClient;
-const SocketRouter = require("./routes/socketRouter");
+const SocketRouter = require("./socketRouter");
 const socketRouter = new SocketRouter(io, redisClient);
 socketRouter.router();
 
