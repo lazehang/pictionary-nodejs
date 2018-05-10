@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Dropbox with cache, Hongkong">
+    <meta name="author" content="Mangal Limbu">
+
+    <title>Pictionary.io</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <link href="main.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <section id="header">
+        <nav class="navbar navbar-expand-lg fixed-top navbar-light ">
+            <a class="navbar-brand flipInX animated" href="#">
+                <h1 style="color: #fff">Pictionary</h1>
+            </a>
+            <i></i>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        {{!-- <a class="nav-link disabled" href="#login">SignIn/login</a> --}}
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </section>
+
+    {{{body}}}
+
+    <!-- JQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.slim.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.6.8-fix/jquery.nicescroll.min.js"></script>
+    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+
+    <script>
+        $(function () {
+
+            $('.chat').niceScroll();
+
+            var socket = io();
+            $("#rmBtn").on('click', ".joinRm", function () {
+                $("#msgBox").removeClass("hide");
+                socket.emit('leaveRm', "leaveRm");
+                let rm = $(this).html();
+                console.log(rm)
+                socket.emit('subscribe', rm);
+            });
+
+            socket.on('join room', function (msg) {
+                $('#chat-messages').empty();
+                $('#chat-messages').append(`<div class="answer left">
+                <div class="avatar">
+                  <img src="https://pbs.twimg.com/profile_images/378800000432816237/7d7e912287eae6baec89463e4babbb84_400x400.jpeg" alt="">
+                  <div class="status online"></div>
+                </div>
+                <div class="text">
+                  ${msg}
+                </div>
+              </div>`);
+            });
+
+            $('#send-message').click(function () {
+                socket.emit('chat message', $('#m').val());
+                console.log($('#m').val());
+                $('#m').val('');
+                return false;
+            });
+
+            socket.on('chat message', function (msg) {
+                console.log(`received: ${msg}`);
+                $('#chat-messages').append(`<div class="answer left">
+                <div class="avatar">
+                  <img src="https://pbs.twimg.com/profile_images/378800000432816237/7d7e912287eae6baec89463e4babbb84_400x400.jpeg" alt="">
+                  <div class="status online"></div>
+                </div>
+                <div class="name">${msg.user}</div>
+                <div class="text">
+                  ${msg.msg}
+                </div>
+              </div>`);
+            });
+
+            socket.on('old message', function (msg) {
+                console.log(`received old msg: ${msg}`)
+                msg.forEach(element => {
+                    let parsed = JSON.parse(element);
+                    $('#chat-messages').append(`
+                    <div class="answer left">
+                        <div class="avatar">
+                        <img src="https://pbs.twimg.com/profile_images/378800000432816237/7d7e912287eae6baec89463e4babbb84_400x400.jpeg" alt="">
+                        <div class="status offline"></div>
+                        </div>
+                        <div class="name">${parsed.user}</div>
+                        <div class="text">
+                        ${parsed.msg}
+                        </div>
+                    </div>`);
+                });
+
+                 $('.chat').scrollTop($('.chat').get(0).scrollHeight, -1);
+            });
+
+        });
+
+       
+    </script>
+</body>
+
+</html>
