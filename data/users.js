@@ -2,14 +2,17 @@ module.exports = [
     {
         id : 0,
         email :"tom@tom.com",
-        password: "$2b$10$GXW2Z3JAdiwgi9SvBQBluuKZV0ycZuY2MPWIbpAOu03y3JphIyI6G"
+        password: "$2b$10$GXW2Z3JAdiwgi9SvBQBluuKZV0ycZuY2MPWIbpAOu03y3JphIyI6G",
+        roomID: null
     },{
         id: 1,
         email : "peter@peter.com",
-        password: "$2b$10$.or2FgGdXToN0X1FKzO4V.yEg0HxIZ555ZkqbxqbZM/HjgQjUSOFm"
+        password: "$2b$10$.or2FgGdXToN0X1FKzO4V.yEg0HxIZ555ZkqbxqbZM/HjgQjUSOFm",
+        roomID: null
     },{
         id: 2,
         email : "tom2@tom.com",
-        password: "$2b$10$GXW2Z3JAdiwgi9SvBQBluuKZV0ycZuY2MPWIbpAOu03y3JphIyI6G"
+        password: "$2b$10$GXW2Z3JAdiwgi9SvBQBluuKZV0ycZuY2MPWIbpAOu03y3JphIyI6G",
+        roomID: null
     }
 ];

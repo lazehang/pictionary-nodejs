@@ -5,9 +5,6 @@
 </head>
 
 <body>
-    <!-- <div id="rmBtn">
-        
-    </div> -->
 
     <div>Player A and B are in this Room</div>
     <div>CANVAS</div>
@@ -15,11 +12,15 @@
     <div>
         <ul id="messages"></ul>
     
-        <form action="" id="msgBox" class="hide">
-            <input id="m" autocomplete="off" />
+        <form action="" id="answerBox" class="">
+            <input id="guess" autocomplete="off" />
             <button>Send</button>
         </form>
     </div>
+
+    <form id="logout" method="GET" action="/logout">
+        <button type="submit">LOGOUT</button>
+    </form>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.slim.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -38,10 +39,10 @@
             });
 
             // Guess event
-            $('#msgBox').submit( () => {
-                socket.emit('submit guess', $('#m').val());
-                console.log($('#m').val());
-                $('#m').val('');
+            $('#answerBox').submit( () => {
+                socket.emit('submit guess', $('#guess').val());
+                console.log($('#guess').val());
+                $('#guess').val('');
                 return false;
             });
 

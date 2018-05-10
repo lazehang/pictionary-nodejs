@@ -46,6 +46,10 @@ module.exports = (express, app, io) => {
         res.sendFile(__dirname + '/lobby.html');
     });
 
+    router.post('/room', (req, res) => {
+        res.sendFile(__dirname + '/room.html');
+    });
+
     router.get('/error', (req, res) => {
         res.send('You are not logged in!');
     });
@@ -53,6 +57,10 @@ module.exports = (express, app, io) => {
     router.get('/logout', (req, res) => {
         req.logout();
         res.redirect('/');
+    });
+    
+    router.get('/test', (req, res) => {
+        res.send("test");
     });
 
     return router;

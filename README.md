@@ -111,3 +111,67 @@ lobby :
 js
     socket on createRoom
 
+
+TO DO
+bocoz socket disconnect n destroy old socket when go to new page
+so can't store detail in session
+
+store active game room and active player in redis
+active player list = {
+    <nanoID> : { 
+        id: id,
+        email: email,
+        nanoID: nanoID, // for game obj
+        roomID: roomID
+     }
+}
+
+redis : 
+    gameList
+    playerList
+    roomIDList
+---
+
+socket on connect
+v
+check if player is in active player list ok
+v
+if no create one and store in redis ok
+v
+done ok
+---
+
+create rm
+v
+send settings through socket + redir to room by form action POST ok
+v
+socket receive settings and player session ok
+v
+create rm obj
+v
+store in redis
+v
+find player in redis db and add roomID to player obj
+v
+socket reconnect
+v
+find player's roomID in redis db and join room
+
+
+join rm
+v
+send choice through socket + redir to room by form action GET
+v
+socket receive settings and player session
+v
+search for rm obj in redis
+v
+add p2
+v
+search for p2 in player db
+v
+add room id
+v
+socket reconnect
+v
+join rm

@@ -5,21 +5,23 @@
 </head>
 
 <body>
-    <div id="create">
-        <input id="privateRoom" type="checkbox">
-        <span>Private</span>
-        <input id="password" type="text" placeholder="password">
-        <span>Password</span>
-        <button id="createRoom">CREATE ROOM</button>
-    </div>
+    <form id="create" method="POST" action="/room">
+        <input id="privateRoom" type="checkbox" name="private">Private<br>
+        <input id="password" type="text" name="password" placeholder="password">Password<br>
+        <input id="createRoom" type="submit">CREATE ROOM</input>
+    </form>
 
     <div id="join">
         <button class="joinRoom" data-roomID="someIDA">rma</button>
         <button class="joinRoom" data-roomID="someIDB">rmb</button>
     </div>
 
-    <form action="/logout" method="get" id="logout">
+    <form id="logout" method="GET" action="/logout">
         <button type="submit">LOGOUT</button>
+    </form>
+
+    <form id="test" method="GET" action="/test">
+        <button type="submit">TEST</button>
     </form>
 
     <!-- <ul id="messages"></ul>
@@ -38,9 +40,9 @@
 
             $("#createRoom").on("click", function () {
                 // boolean
-                let private = $("#privateRoom").attr("checked");
+                let private = $("#privateRoom").prop("checked");
                 // string or null
-                let password = $("#password").value() || null;
+                let password = $("#password").prop("value") || null;
                 // replace above line with wtever u need
                 // as long as i get the 2 value
 
@@ -49,25 +51,9 @@
                     private: private,
                     password: password
                 };
+                // console.log(settings.private);
+                // console.log(settings.password);
                 socket.emit("create room", settings)
-
-            });
-
-            socket.on("room created", function (gameObject) {
-                // server created new room, go to that room
-                // room ID comes as data.roomID
-
-                $.ajax({
-                    method: "get",
-                    url: "/room",
-                    data: gameObject
-                })
-                .done(res => {
-                    $("document").html(res.file);
-                })
-                .fail( err => {
-                    console.log(err);
-                });
 
             });
 
