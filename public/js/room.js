@@ -3,6 +3,10 @@
 
 $(document).ready(chalkboard);
 
+$(".chat").niceScroll();
+$("#ranking").niceScroll();
+
+
 function chalkboard() {
 
     var socket = io();
@@ -23,14 +27,36 @@ function chalkboard() {
     let yLast = 0;
     let brushDiameter = 10;
     let rgbaColor = 'rgba(255,255,255,1)';
+
     // offset canvas
-    $(".upper").offset({ top: 45, left: 45 });
-    $("#color-picker").offset({ top: 533, left: 45 });
+    $(".upper").offset({ top: 50, left: 50 })
+
+    $(window).on('resize', function() {
+        var halfWindow = $(window).width() / 2;
+        var halfRoom = $('.room').width() / 2;
+
+        var newOffset = (halfWindow - halfRoom);
+
+        console.log(newOffset);
+        $(".room").offset({ top: 90, left: newOffset })
+        $("#color-picker").offset({ top: 630, left: newOffset + 20 })
+
+    })
+
+    var halfWindow = $(window).width() / 2;
+    var halfRoom = $('.room').width() / 2;
+
+    var newOffset = (halfWindow - halfRoom);
+
+    console.log(newOffset);
+    $(".room").offset({ top: 90, left: newOffset })
+
+    $("#color-picker").offset({ top: 630, left: newOffset + 20 })
 
     // $('#chalkboard').css('cursor', 'none');
-    document.onselectstart = function () { return false; };
+    document.onselectstart = function() { return false; };
     //right click mouse context menu to shut off
-    document.oncontextmenu = function () { return false; };
+    document.oncontextmenu = function() { return false; };
 
     ctx.fillStyle = rgbaColor;
     ctx.strokeStyle = rgbaColor;
@@ -57,7 +83,7 @@ function chalkboard() {
     });
 
 
-    $("#chalkboard").mousemove(function (evt) {
+    $("#chalkboard").mousemove(function(evt) {
         mouseX = evt.pageX - $("#canvas-real").offset().left;
         mouseY = evt.pageY - $("#canvas-real").offset().top;
         if (mouseD) {
@@ -66,7 +92,7 @@ function chalkboard() {
         }
     });
 
-    $("#chalkboard").mousedown(function (evt) {
+    $("#chalkboard").mousedown(function(evt) {
         mouseD = true;
         mouseX = evt.pageX - $("#canvas-real").offset().left;
         mouseY = evt.pageY - $("#canvas-real").offset().top;
@@ -75,7 +101,7 @@ function chalkboard() {
         socket.emit("mouse down", { mouseX: mouseX, mouseY: mouseY });
     });
 
-    $("#chalkboard").mouseup(function (evt) {
+    $("#chalkboard").mouseup(function(evt) {
         mouseD = false;
         socket.emit("mouse up");
     });
@@ -126,78 +152,78 @@ function chalkboard() {
     }
 
     //Color change
-    $("#red").click(function () {
+    $("#red").click(function() {
         rgbaColor = 'rgba(255,0,0,1)';
         socket.emit("change color", rgbaColor);
     })
-    $("#orange").click(function () {
+    $("#orange").click(function() {
         rgbaColor = 'rgba(255,179,0,1)';
         socket.emit("change color", rgbaColor);
     })
-    $("#yellow").click(function () {
+    $("#yellow").click(function() {
         rgbaColor = 'rgba(255,251,0,1)';
         socket.emit("change color", rgbaColor);
     })
-    $("#brown").click(function () {
+    $("#brown").click(function() {
         rgbaColor = 'rgba(122,67,0,1)';
         socket.emit("change color", rgbaColor);
     })
-    $("#green").click(function () {
+    $("#green").click(function() {
         rgbaColor = 'rgba(0,209,0,1)';
         socket.emit("change color", rgbaColor);
     })
-    $("#light-blue").click(function () {
+    $("#light-blue").click(function() {
         rgbaColor = 'rgba(131,216,251,1)';
         socket.emit("change color", rgbaColor);
     })
-    $("#blue").click(function () {
+    $("#blue").click(function() {
         rgbaColor = 'rgba(0,125,214,1)';
         socket.emit("change color", rgbaColor);
     })
-    $("#light-red").click(function () {
+    $("#light-red").click(function() {
         rgbaColor = 'rgba(255,126,121,1)';
         socket.emit("change color", rgbaColor);
     })
-    $("#purple").click(function () {
+    $("#purple").click(function() {
         rgbaColor = 'rgba(148,33,147,1)';
         socket.emit("change color", rgbaColor);
     })
-    $("#lighter-purple").click(function () {
+    $("#lighter-purple").click(function() {
         rgbaColor = 'rgba(255,101,255,1)';
         socket.emit("change color", rgbaColor);
     })
-    $("#black").click(function () {
+    $("#black").click(function() {
         rgbaColor = 'rgba(0,0,0,1)';
         socket.emit("change color", rgbaColor);
     })
-    $("#white").click(function () {
+    $("#white").click(function() {
         rgbaColor = 'rgba(255,255,255,1)';
         socket.emit("change color", rgbaColor);
     })
-    $("#grey").click(function () {
+    $("#grey").click(function() {
         rgbaColor = 'rgba(162,165,169,1)';
         socket.emit("change color", rgbaColor);
     })
 
     //changeLineWidth
-    $("#small").click(function () {
+    $("#small").click(function() {
         brushDiameter = 10;
         socket.emit("brush size", brushDiameter);
     })
-    $("#big").click(function () {
+    $("#big").click(function() {
         brushDiameter = 30;
         socket.emit("brush size", brushDiameter);
     })
 
     //duster
-    $("#duster").click(function () {
+    $("#duster").click(function() {
         rgbaColor = 'rgba(255,255,255,0)';
         duster(mouseX, mouseY);
         socket.emit("dust", { mouseX: mouseX, mouseY: mouseY, rgbaColor: rgbaColor });
     });
 
     // guessing
-    $('#msgBox').submit(function () {
+    $('#msgBox').submit(function() {
         socket.emit('submit guess', $('#m').val());
         return false;
     });

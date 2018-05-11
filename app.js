@@ -37,15 +37,25 @@ const settings = {
     cookie: { "path": '/', "httpOnly": true, "secure": false, "maxAge": null },
     resave: false,
     saveUninitialized: true
-    // maxAge : 10 * 60 * 1000 ms
+        // maxAge : 10 * 60 * 1000 ms
 };
 
-redisClient.on("error", function (err) {
+redisClient.on("error", function(err) {
     console.log(`REDIS: ${err}`);
 });
 
 app.use(expressSession(settings));
 io.use(socketIOSession(settings).parser);
+
+app.engine('handlebars', hb({
+    defaultLayout: 'main',
+    layoutsDir: __dirname + '/views/layouts',
+    partialsDir: [
+        //  path to your partials
+        __dirname + '/views',
+    ]
+}));
+app.set('view engine', 'handlebars');
 
 // passport
 console.log("passport.js");
