@@ -1,0 +1,78 @@
+.lobby {
+    margin-top: 5rem;
+}
+
+.profile {
+    border: 3px #000000 solid;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    background-color: #CBE9F8;
+}
+
+.profile>img {
+    margin: 30px;
+}
+
+h3 {
+    display: flex;
+    justify-content: center;
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+.info {
+    margin: 10px;
+}
+
+.booking {
+    border: 3px #000000 solid;
+    background-image: url("/images/paper.jpg");
+}
+
+.lower {
+    border: 3px #000000 solid;
+    height: 500px;
+    background-image: url("/images/wall1.jpg");
+}
+
+.singleRoom {
+    /* width: 18vw; */
+    /* height: 18vw; */
+    margin: 5px;
+    display: inline-block;
+    float: left;
+}
+
+.room {
+    margin: 5px;
+}
+
+#door {
+    width: 100px;
+    height: 200px;
+}
+
+#p1name {
+    width: 100px;
+    background-color: #74D1FB;
+    border: 3px black solid;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+#p2name {
+    width: 100px;
+    background-color: #74D1FB;
+    border: 3px black solid;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+#roomID {
+    width: 100px;
+    background-color: #74D1FB;
+    border: 3px black solid;
+    border-radius: 5px;
+    margin: 5px;
+}

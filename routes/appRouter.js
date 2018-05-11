@@ -4,7 +4,16 @@ const passport = require('passport');
 const SocketRouter = require("./socketRouter");
 var socketRouterList = {};
 
-module.exports = (express, app) => {
+const knexConfig = require('../knexfile')[process.env.NODE_ENV || 'staging'];
+const knex = require('knex')(knexConfig);
+
+const AppService = require('../services/appService');
+const appService = new AppService(knex);
+
+
+
+
+module.exports = (express, app, io) => {
     const router = express.Router();
 
     function isLoggedIn(req, res, next) {
@@ -48,23 +57,49 @@ module.exports = (express, app) => {
     });
 
     router.get('/lobby', isLoggedIn, (req, res) => {
-        res.render('lobby', {
-            isLoggedIn: req.isAuthenticated()
-        });
+        appService.getStat(req.user.id).then((stat) => {
+            res.render('lobby', {
+                user: req.user,
+                isLoggedIn: req.isAuthenticated(),
+                stats: stat
+            });
+        })
     });
 
     router.post("/room", (req, res) => {
-        res.render("room");
+        appService.getAllStats().then((allStats) => {
+            console.log(allStats)
+            res.render("room", {
+                allStats: allStats,
+                isLoggedIn: req.isAuthenticated()
+            });
+        });
+
     })
 
     router.get('/logout', (req, res) => {
         req.logout();
         res.redirect('/');
     });
-    
+
     router.get('/error', (req, res) => {
         res.send('You are not logged in!');
     });
+
+    router.get('/stats', isLoggedIn, (req, res) => {
+        appService.getStat(req.user.id).then((stat) => {
+            res.json(stat);
+        });
+    });
+
+    router.get('/profile', (req, res) => {
+        appService.getStat(req.user.id).then((stat) => {
+            res.render('profile', {
+                stats: stat
+            });
+        })
+
+    })
 
     return router;
 };
