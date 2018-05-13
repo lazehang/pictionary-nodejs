@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Chalkboard Lobby</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="./lobby.css">
+</head>
+
+<body>
+
+    <div class="container lobby">
+        <div class="row upper">
+            <div class="col-5 profile" style="width: 400px; height: 200px">
+
+                <div class="info">
+                    <h4>Student Identify Card</h4>
+                    <p class="username">username:</p>
+                    <p class="game">Number of game played:</p>
+                    <p class="score">total score:</p>
+                </div>
+
+                <img src="./images/guest1.png" width="100" height="125">
+
+
+            </div>
+
+            <div class="col-7 booking" style="width: 600px; height: 200px">
+                <h3>Room Booking Form</h3>
+                <form id="create" method="POST" action="./drawing.html">
+                    Name of Room:
+                    <input id="roomName" type="text" style="margin-bottom: 10px">
+                    <br> Private?
+                    <input id="privateRoom" type="checkbox" name="private" style="margin-bottom: 10px">
+                    <br> Password:
+                    <input id="password1" type="text" name="password" placeholder="password" style="margin-bottom: 7px">
+                    <br>
+                    <input id="createRoom" type="submit" value="BOOK THE ROOM">
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 rooms">
+                <p>LOBBY</p>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#password1").prop("disabled", true);
+
+        $("#privateRoom").click(function () {
+            let n = this.checked;
+            if (n == true) {
+                $("#password1").removeAttr("disabled");
+            } else {
+                $("#password1").prop("disabled", true);
+            }
+        });
+
+    </script>
+</body>
+
+<!-- let gameObject = {
+    roomID:     this.redisFx.randomGenID("roomID"),
+    playerOne:  activePlayer.nanoID,
+    playerTwo:  null,
+    private:    settings.private,
+    password:   settings.password,
+    full:       (this.playerTwo ? true : false)
+}; -->
+
+</html>

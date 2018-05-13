@@ -1,0 +1,32 @@
+.profile {
+    border: 3px #000000 solid;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.profile > img {
+    margin: 30px;
+}
+
+h3 {
+    display: flex;
+    justify-content: center;
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+.info {
+    margin: 10px;
+}
+
+.booking {
+    border: 3px #000000 solid;
+    background-image: url("./images/paper.jpg");
+}
+
+
+.rooms {
+    border: 3px #000000 solid;
+    height: 400px;
+}
