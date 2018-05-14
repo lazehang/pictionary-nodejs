@@ -165,9 +165,9 @@ function chalkboard() {
         // }
     });
 
-    // use spacebar to restart
+    // use "C" to restart
     $(document).keyup(function (evt) {
-        if (evt.keyCode == 32) {
+        if (evt.keyCode == 67) {
             ctx.clearRect(0, 0, width, height);
             layPattern();
         }

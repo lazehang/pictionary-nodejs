@@ -26,7 +26,46 @@ h3 {
 }
 
 
-.rooms {
+.lower {
     border: 3px #000000 solid;
-    height: 400px;
+    height: 500px;
+    background-image: url("./images/wall1.jpg");
+}
+
+.singleRoom {
+    width: 18vw;
+    height: 18vw;
+    margin: 5px;
+}
+.room {
+    margin: 5px;
+}
+
+#door {
+    width: 100px;
+    height: 200px;
+}
+
+#p1name {
+    width: 100px;
+    background-color: #74D1FB;
+    border: 3px  black solid;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+#p2name {
+    width: 100px;
+    background-color: #74D1FB;
+    border: 3px  black solid;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+#roomID {
+    width: 100px;
+    background-color: #74D1FB;
+    border: 3px  black solid;
+    border-radius: 5px;
+    margin: 5px;
 }
