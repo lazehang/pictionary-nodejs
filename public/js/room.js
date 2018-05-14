@@ -199,7 +199,6 @@ function chalkboard() {
     // guessing
     $('#msgBox').submit(function () {
         socket.emit('submit guess', $('#m').val());
-        $('#m').val('');
         return false;
     });
 
@@ -235,8 +234,142 @@ function chalkboard() {
     });
 
     socket.on('receive guess', function (data) {
-        console.log(data)
+        // console.log(data)
         $('#chatroom').append($('<p>').text(data));
     });
 
+    // === game logic ===
+
+    $("#ranking").append($("<button id='start' class='hide'>").html("START"));
+    $("#ranking").append($("<button id='next' class='hide'>").html("NEXT"));
+    socket.on("both player ready", () => {
+        game();
+    });
+
+    function game() {
+        let keywords = ["apple", "dog", "house"];
+        let i = 0;
+        let round = 1;
+        let win = 0;
+        let point = 0;
+        let stopTimer = false;
+        setTimerDisplay();
+        $("#start").removeClass("hide");
+
+        // tells players game start
+        $("#ranking").on("click", "#start", () => {
+            $("#start").addClass("hide");
+            socket.emit("round ready");
+        });
+
+        $("#ranking").on("click", "#next", () => {
+            socket.emit("round ready");
+            $("#next").addClass("hide");
+            $("#keyword").empty();
+            ctx.clearRect(0, 0, 706, 488);
+            setTimerDisplay();
+        });
+
+        // monitor chat box for correct answer
+        $('#msgBox').submit(() => {
+            let ans = $('#m').val().toLowerCase();
+            if (ans == keywords[i]) {
+                win_round();
+            }
+            $('#m').val('');
+        });
+
+        $("#ranking").on("click", "#toLobby", () => {
+            // appear on end game
+            socket.emit("leave room");
+        });
+
+        function startRound () {
+            // put keywords in ranking Box for drawer only
+            $("#keyword").text(keywords[i]);
+            ctx.clearRect(0, 0, 706, 488);
+            stopTimer = false;
+            console.log("start round")
+            startTimer();
+        }
+
+        function win_round() {
+            stopTimer = true;
+            socket.emit("win round");
+        }
+
+        function lose_round() {
+            socket.emit("lose round");
+        }
+
+        socket.on("start round", () => {
+            startRound();
+        });
+        
+        socket.on("win round", () => {
+            finishRound("win");
+        });
+        
+        socket.on("lose round", () => {
+            finishRound("lose");
+        });
+        
+        function finishRound(stat){
+            if (stat == "win") {
+                round++;
+                i++;
+                point++;
+                win++;
+            }
+            else if (stat == "lose") {
+                round++;
+                i++;
+            }
+            if (round <= 3){
+                endRoundDisplay();
+            }
+            else {
+                endGameDisplay();
+            }
+        }
+
+        function endRoundDisplay(result) {
+            $("#next").removeClass("hide");
+            // move ^this to middle and add a like "you lose"
+            // move ^this to middle and add a like "you win"
+        }
+        
+        function endGameDisplay(result) {
+            // some code to make a pop up
+            // + ok btn to return to lobby , will trigger socket
+        }
+
+        function startTimer() {
+            if (!stopTimer) {
+                var presentTime = $('#timer').html();
+                var timeArray = presentTime.split(/[:]+/);
+                var m = timeArray[0];
+                var s = checkSecond((timeArray[1] - 1));
+                if (s == 59) { m = m - 1 }
+                if (m < 0) {
+                    stopTimer = true;
+                    lose_round();
+                }
+                else {
+                    $('#timer').html(m + ":" + s);
+                    setTimeout(startTimer, 1000);
+                }
+            }
+        }
+
+        function checkSecond(sec) {
+            if (sec < 10 && sec >= 0) { sec = "0" + sec }; // add zero in front of numbers < 10
+            if (sec < 0) { sec = "59" };
+            return sec;
+        }
+
+        function setTimerDisplay() {
+            $('#timer').html(01 + ":" + 00);
+        }
+    }
 }

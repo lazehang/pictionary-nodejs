@@ -24,7 +24,7 @@
 
 <!-- dev -->
 <form id="create" method="POST" action="/room">
-    <input id="customName" type="text" name="customName">customName
+    <input id="roomName" type="text" name="roomName">Room Name
     <br>
     <input id="privateRoom" type="checkbox" name="private">Private
     <br>
@@ -37,6 +37,8 @@
     <input type="submit" class="joinRoom" data-roomID="someIDA" value="rma">
     <input type="submit" class="joinRoom" data-roomID="someIDB" value="rmb">
 </form>
+
+<button id="F5room">GET ROOM</button>
 
 <form id="logout" method="GET" action="/logout">
     <button type="submit">LOGOUT</button>

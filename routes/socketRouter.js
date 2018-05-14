@@ -51,17 +51,30 @@ class SocketRouter {
                     this.socketJoinRoom(socket);
                 })
 
-                socket.on("leave room", msg => {
-                    this.onLeaveRoom(socket, msg);
+                socket.on("leave room", () => {
+                    this.onLeaveRoom(socket);
                 });
 
-                socket.on("end game", msg => {
-                    // this.onLeaveRoom(socket, msg);
+                socket.on("end game", data => {
+                    this.onEndGame(socket, data);
                 });
 
                 // // === SocketGameEvent ===
                 let room = "";
                 this.findGameByPlayer(socket).then((data) => room = data);
+
+                socket.on("round ready", () => {
+                    this.roundReady(socket, room);
+                });
+
+                socket.on("win round", () => {
+                    this.roundWin(socket, room);
+                });
+
+                socket.on("lose round", () => {
+                    this.roundLose(socket, room);
+                });
+
                 // === guess event ===
                 socket.on("submit guess", data => {
                     this.onGuess(socket, data, room);
@@ -118,16 +131,19 @@ class SocketRouter {
         let activePlayer = await this.redisFx.findPlayerFromList(player);
         let gameObject = {
             roomID: "someIDA", //this.redisFx.randomGenID("roomID"),
+            roomName: settings.roomName || "default",
             playerOne: activePlayer.nanoID,
+            P1name: activePlayer.username,
             playerTwo: null,
+            P2name: null,
             private: settings.private,
             password: settings.password,
             full: (this.playerTwo ? true : false)
         };
         // dev
-        console.log(`Room Creator   ${gameObject.playerOne}`);
+        console.log(`Room Creator   ${gameObject.P1name}     ${gameObject.playerOne}`);
         console.log(`Game id        ${gameObject.roomID}`);
-        console.log(`Game p2        ${gameObject.playerTwo}`);
+        console.log(`Game p2        ${gameObject.P2name}     ${gameObject.playerTwo}`);
         console.log(`Game privacy   ${gameObject.private}`);
         console.log(`Game pw        ${gameObject.password}`);
         console.log(`Game full      ${gameObject.full}`);
@@ -158,7 +174,7 @@ class SocketRouter {
             playerID = user.nanoID;
             username = user.username;
             // writeP2IntoGameObj
-            await this.redisFx.writePlayer2IntoGameObject({ roomID: roomID, playerID: playerID });
+            await this.redisFx.writePlayer2IntoGameObject({ roomID: roomID, playerID: playerID, username: username });
         }
         // write room ID to player obj
         await this.redisFx.writeRoomIDToPlayerObjectInDB({ roomID: roomID, playerID: playerID });
@@ -194,7 +210,7 @@ class SocketRouter {
         }
     }
 
-    async onLeaveRoom(socket, msg) {
+    async onLeaveRoom(socket) {
         let player = socket.session.passport.user;
         // p2 leave room > ajax get lobby > socket auto leave room > socket reconnect
         // remove rmID from p2 obj > remove p2 from rm obj
@@ -206,6 +222,7 @@ class SocketRouter {
             // room obj
             await this.redisFx.removeGameFromList(gameObj);
             gameObj.playerTwo = null;
+            gameObj.P2name = null;
             await this.redisFx.addGameToList(gameObj);
             // player obj
             await this.redisFx.removePlayerUsingNanoID(playerObj.nanoID);
@@ -242,9 +259,8 @@ class SocketRouter {
     }
 
     async getRoomList(socket) {
-        // let JSONlist = await this.redisFx.getRoomList(socket);
-        let listWithNames = await this.redisFx.gameListWithNames(socket);
-        socket.emit("new game list", listWithNames);
+        let listOfGames = await this.redisFx.getRoomList(socket);
+        socket.emit("new game list", listOfGames);
     }
 
     onDisconnect(username) {
@@ -266,7 +282,7 @@ class SocketRouter {
     // === guess event ===
     onGuess(socket, data, room) {
         console.log(data);
-        this.io.in(room).emit("receive guess", data);
+        this.io.to(room).emit("receive guess", data);
     }
 
     // === draw event ===
@@ -286,15 +302,36 @@ class SocketRouter {
     }
 
     onDust(socket, data, room) {
-        this.io.in(room).emit("dust", data);
+        this.io.to(room).emit("dust", data);
     }
 
     onChangeColor(socket, data, room) {
-        this.io.in(room).emit("change color", data);
+        this.io.to(room).emit("change color", data);
     }
 
     onChangeSize(socket, data, room) {
-        this.io.in(room).emit("brush size", data);
+        this.io.to(room).emit("brush size", data);
+    }
+
+    onEndGame(socket, data) {
+        // data = { gamePlayed , win , point }
+        // write to knex
+    }
+
+    async roundReady(socket, room) {
+        let allReady = await this.redisFx.roundReady(socket.session.passport.user.username, room);
+        if (allReady) {
+            console.log("start")
+            this.io.to(room).emit("start round");
+        }
+    }
+
+    roundWin(socket, room) {
+        this.io.to(room).emit("win round");
+    }
+
+    roundLose(socket, room) {
+        this.io.to(room).emit("lose round");
     }
 }
 

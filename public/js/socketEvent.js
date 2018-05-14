@@ -6,12 +6,14 @@ $(function () {
         // boolean
         let private = $("#privateRoom").prop("checked");
         // string or null
-        let password = $("#password").prop("value") || null;
+        let password = $("#password1").prop("value") || null;
         // replace above line with wtever u need
         // as long as i get the 2 value
+        let roomName = $("#roomName").prop("value");
 
         // ask server to create a new room
         let settings = {
+            roomName: roomName,
             private: private,
             password: password
         };
@@ -42,5 +44,14 @@ $(function () {
     $("#leave").on("click", () => {
         console.log("leave room");
         socket.emit("leave room", null);
-    })
+    });
+
+    $("#F5room").on("click", () => {
+        console.log("F5");
+        socket.emit("update game list");
+    });
+
+    socket.on("new game list", data => {
+        console.log(data);
+    });
 });
