@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    
+
 
     <div class="row">
         <div class="col-12 lower">
@@ -52,4 +52,21 @@
         </div>
     </div>
 </div>
+
+
+<!-- dev -->
+<form id="create" method="POST" action="/room">
+    <input id="roomName" type="text" name="roomName">Room Name
+    <br>
+    <input id="privateRoom" type="checkbox" name="private">Private
+    <br>
+    <input id="password" type="text" name="password" placeholder="password">Password
+    <br>
+    <input id="createRoom" type="submit">CREATE ROOM</input>
+</form>
+<button id="F5room">GET ROOM</button>
+
+<form id="logout" method="GET" action="/logout">
+    <button type="submit">LOGOUT</button>
+</form>
 

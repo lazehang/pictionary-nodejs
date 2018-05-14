@@ -96,3 +96,26 @@
 /* body {
     background-image: url("/images/wall.jpg");
 } */
+
+.hide {
+    display: none;
+}
+
+#timer1 {
+    font-size: 30px;
+    margin: 10px;
+}
+
+#timerAndStart {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    height: 45px;
+}
+
+
+#start,
+#next,
+#toLobby {
+    margin: 10px;
+}

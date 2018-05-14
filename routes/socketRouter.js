@@ -318,11 +318,62 @@ class SocketRouter {
         // write to knex
     }
 
-    async roundReady(socket, room) {
-        let allReady = await this.redisFx.roundReady(socket.session.passport.user.username, room);
+    roundReady(socket, room) {
+        let username = socket.session.passport.user.username;
+        let opp = "";
+        let allReady = false;
+        let key = Object.keys(roundReady);
+        console.log("check ready");
+        if (key.length == 0){
+            console.log("empty list");
+            roundReady[room] = {};
+            roundReady[room][username] = {};
+            roundReady[room][username]["ready"] = true;
+        }
+        else {
+            if (typeof (roundReady[room]) == "undefined") {
+                console.log("no room found, add 1");
+                roundReady[room] = {};
+                roundReady[room][username] = {};
+                roundReady[room][username]["ready"] = true;
+            }
+            else {
+                let ukey = Object.keys(roundReady[room]);
+                if (ukey.length == 1) {
+                    if (ukey[0] != username) {
+                        opp = ukey[0];
+                        console.log("obj has 1 key, diff user");
+                        roundReady[room][username] = {};
+                        roundReady[room][username]["ready"] = true;
+                        allReady = true;
+                    } else {
+                        console.log("obj has 1 key, same user");
+                    }
+                }
+                else {
+                    // round2 n on
+                    opp = (ukey[0] == username) ? ukey[1] : ukey[0];
+                    if (roundReady[room][opp]["ready"] && !roundReady[room][username]["ready"]) {
+                        console.log("obj has 2 key , both ok now");
+                        roundReady[room][username]["ready"] = true;
+                        allReady = true;
+                    }
+                    else {
+                        console.log("obj has 2 key , opp not ok");
+                        // other guy not ready
+                        roundReady[room][username]["ready"] = true;
+                    }
+                }
+            }
+        }
         if (allReady) {
-            console.log("start")
+            console.log("start :", socket.session.passport.user.username);
             this.io.to(room).emit("start round");
+            allReady = false;
+            console.log(opp)
+            console.log(roundReady[room])
+            roundReady[room][username]["ready"] = false;
+            roundReady[room][opp]["ready"] = false;
         }
     }
 
@@ -330,11 +381,13 @@ class SocketRouter {
         this.io.to(room).emit("win round");
     }
 
-    roundLose(socket, room) {
-        this.io.to(room).emit("lose round");
-    }
+    // roundLose(socket, room) {
+    //     this.io.to(room).emit("lose round");
+    // }
 }
 
 module.exports = SocketRouter;
 
 let joinRoomAfterLoad = {};
+
+let roundReady = {};

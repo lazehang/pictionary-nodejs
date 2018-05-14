@@ -326,60 +326,67 @@ class RedisFunction {
                             let obj = {};
                             obj[room] = {};
                             obj[room][username] = {};
-                            obj[room][username]["ready"] = true,
-                                obj[room][username]["written"] = true,
-                                this.redisClient.lpush("roundList", JSON.stringify(obj), (err, data) => {
-                                    resolve(false);
-                                });
+                            obj[room][username]["ready"] = true;
+                            obj[room][username]["written"] = true;
+                            this.redisClient.lpush("roundList", JSON.stringify(obj), (err, data) => {
+                                resolve(false);
+                            });
                         }
                         else {
                             list = JSON.parse(data);
-                            let key = Object.keys(list[room]);
-                            if (key.length == 1) {
-                                // 1st entry, p2
-                                console.log(username)
-                                if (key[0] != username) {
-                                    console.log("obj has 1 key, diff user");
-                                    list[room][username] = {};
-                                    list[room][username]["ready"] = false;
-                                    list[room][username]["written"] = false;
-                                    this.redisClient.lpush("roundList", JSON.stringify(list), (err, data) => {
-                                        resolve(true);
-                                    });
-                                } else {
-                                    console.log("obj has 1 key, same user");
-                                    this.redisClient.lpush("roundList", JSON.stringify(list), (err, data) => {
-                                        resolve(false);
-                                    });
-                                }
+                            if (typeof (list[room]) == "undefined") {
+                                // room not found , add one
+                                list[room] = {};
+                                list[room][username] = {};
+                                list[room][username]["ready"] = true;
+                                list[room][username]["written"] = true;
+                                this.redisClient.lpush("roundList", JSON.stringify(list), (err, data) => {
+                                    resolve(false);
+                                });
                             }
                             else {
-                                // 2p in obj
-                                let opp = "";
-                                if (key[0] == username) {
-                                    opp = key[1];
+                                // work on list[room]
+                                let key = Object.keys(list[room]);
+                                if (key.length == 1) {
+                                    // round1
+                                    console.log(username);
+                                    if (key[0] != username) {
+                                        console.log("obj has 1 key, diff user");
+                                        list[room][username] = {};
+                                        list[room][username]["ready"] = true;
+                                        list[room][username]["written"] = true;
+                                        this.redisClient.lpush("roundList", JSON.stringify(list), (err, data) => {
+                                            resolve(true);
+                                        });
+                                    } else {
+                                        console.log("obj has 1 key, same user");
+                                        this.redisClient.lpush("roundList", JSON.stringify(list), (err, data) => {
+                                            resolve(false);
+                                        });
+                                    }
                                 }
                                 else {
-                                    opp = key[0];
-                                }
-                                if (list[room][opp]["ready"] == true) {
-                                    console.log("obj has 2 key , both ok");
-                                    // other guy is ready , return T
-                                    list[room][key[0]]["ready"] = false;
-                                    list[room][key[1]]["ready"] = false;
-                                    list[room][key[0]]["written"] = false;
-                                    list[room][key[1]]["written"] = false;
-                                    this.redisClient.lpush("roundList", JSON.stringify(list), (err, data) => {
-                                        resolve(true);
-                                    });
-                                }
-                                else {
-                                    console.log("obj has 2 key , not both ok");
-                                    // other guy not ready
-                                    list[room][username]["ready"] = true;
-                                    this.redisClient.lpush("roundList", JSON.stringify(list), (err, data) => {
-                                        resolve(false);
-                                    });
+                                    // round2 n on
+                                    let opp = (key[0] == username) ? key[1] : key[0];
+
+                                    if (list[room][opp]["ready"] && !list[room][username]["ready"]) {
+                                        console.log("obj has 2 key , both ok");
+                                        // other guy is ready , return T
+                                        list[room][username]["ready"] = true;
+                                        list[room][username]["written"] = true;
+                                        this.redisClient.lpush("roundList", JSON.stringify(list), (err, data) => {
+                                            resolve(true);
+                                        });
+                                    }
+                                    else {
+                                        console.log("obj has 2 key , opp not ok");
+                                        // other guy not ready
+                                        list[room][username]["ready"] = true;
+                                        list[room][username]["written"] = true;
+                                        this.redisClient.lpush("roundList", JSON.stringify(list), (err, data) => {
+                                            resolve(false);
+                                        });
+                                    }
                                 }
                             }
                         }
@@ -389,6 +396,26 @@ class RedisFunction {
             catch (err) {
                 reject(err);
             }
+        });
+    }
+
+    resetReady(room) {
+        let list = "";
+        return new Promise ((resolve, reject) => {
+            this.redisClient.lrange("roundList", 0, -1, (err, data) => {
+                list = JSON.parse(data);
+                this.redisClient.del("roundList", () => {
+                    let key = Object.keys(list[room]);
+                    list[room][key[0]]["ready"] = false;
+                    list[room][key[1]]["ready"] = false;
+                    list[room][key[0]]["written"] = false;
+                    list[room][key[1]]["written"] = false;
+                    this.redisClient.lpush("roundList", JSON.stringify(list), (err, data) => {
+                        if (err) { reject(err); }
+                        resolve();
+                    });
+                });
+            });
         });
     }
 }

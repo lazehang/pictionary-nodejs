@@ -1,0 +1,53 @@
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 50vw;
+  }
+  
+  .all {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  body {
+    padding: 0px;
+    border: 0px;
+    margin: 0px;
+    /* background-image: url("./images/chalkboard-loginpage.jpg"); */
+    background-image: url("./images/chalkboard2.png");
+    background-size: 100vw 50vw;
+    background-repeat: no-repeat;
+  }
+  
+  
+  #name {
+    width: 35vw;
+    height: 10vw;
+  }
+  
+  #login-with {
+    width: 15vw;
+    height: 10vw;
+  }
+  
+  
+  
+  /* #guest {
+    align-self: flex-end;
+  } */
+  
+  .method>input {
+    width: 8vw;
+    height: 8vw;
+    transition: transform .2s;
+    margin-left: 3vw;
+    margin-right: 3vw;
+  }
+  
+  input:hover {
+    transform: scale(1.3);
+  }

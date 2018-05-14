@@ -1,6 +1,9 @@
 
-// timer no stop
-// readychecker no ok
+// hide  / color picker later
+
+// drawer timer no stop
+// on timeout > lobby btn?
+
 
 // pop start on both side
 // both side click start
@@ -10,7 +13,7 @@
 //          pop keyword on DRAWING SIDE
 //          stoptimer F
 //          start timer
-//          listen to ans?
+//          listen to ans
 
 // correct ans
 // stoptimer T

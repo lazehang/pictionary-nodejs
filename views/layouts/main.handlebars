@@ -8,7 +8,7 @@
     <meta name="description" content="Dropbox with cache, Hongkong">
     <meta name="author" content="Mangal Limbu">
 
-    <title>Pictionary.io</title>
+    <title>ChalkBoard.io</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy"
         crossorigin="anonymous">
@@ -24,7 +24,7 @@
     <section id="header">
         <nav class="navbar navbar-expand-lg fixed-top navbar-light ">
             <a class="navbar-brand flipInX animated" href="#">
-                <h1 style="color: #fff">Pictionary</h1>
+                <h1 style="color: #fff">ChalkBoard</h1>
             </a>
             <i></i>
 
@@ -43,10 +43,6 @@
             </div>
         </nav>
     </section>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.slim.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.6.8-fix/jquery.nicescroll.min.js"></script>
     
 
     {{{body}}}
@@ -54,6 +50,10 @@
     <!-- JQuery -->
 
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.slim.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.6.8-fix/jquery.nicescroll.min.js"></script>
 
     
 
@@ -61,16 +61,19 @@
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
 
-    <script src="js/socketEvent.js"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
         crossorigin="anonymous"></script>
     {{!-- room page only --}}
     {{!-- <script src="canvas-common.js"></script> --}}    
 
     {{#if isLoggedIn}}
-        <script src="js/main.js"></script>
+        {{#if isRoomPage}}
+            <script src="js/room.js"></script>
+        {{else}}
+            <script src="js/socketEvent.js"></script>
+        {{/if}}
     {{/if}}
+
 </body>
 
 </html>

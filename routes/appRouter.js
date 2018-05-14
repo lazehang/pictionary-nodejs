@@ -24,7 +24,8 @@ module.exports = (express, app, io) => {
     }
 
     router.get('/', (req, res) => {
-        res.redirect('/lobby');
+        res.sendFile(__dirname + "/landing-page.html");
+        // res.redirect('/lobby');
     });
 
     router.get('/login', (req, res) => {
@@ -67,7 +68,8 @@ module.exports = (express, app, io) => {
             console.log(allStats)
             res.render("room", {
                 allStats: allStats,
-                isLoggedIn: req.isAuthenticated()
+                isLoggedIn: req.isAuthenticated(),
+                isRoomPage: true
             });
         });
 

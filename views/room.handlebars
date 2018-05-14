@@ -1,201 +1,112 @@
 <link href="css/drawing.css" rel="stylesheet">
-{{!-- 
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <div class="draw mt-4">
-                <div class="room p-5">
-                    <div class="upper">
-                        <div>
 
-                            <div id="canvas-container">
-                                <canvas id="canvas-real" class="canvas" width='706px' height='488px'></canvas>
-                                <canvas id="chalkboard" class="canvas" width='706px' height='488px'></canvas>
-                                <canvas id="canvas-cover" class="canvas" width='706px' height='488px'></canvas>
-                            </div>
+<div class="draw">
 
-                        </div>
-
-                        <div>
-
-                            <div id="ranking">
-                                <p id="keyword"></p>
-                                <p>ranking</p>
-
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                        <th scope="col">Rank</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Score</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    {{#each allStats}}
-
-                                        <tr>
-                                        <th scope="row">{{this.index}}</th>
-                                        <td> {{this.name}}</td>
-                                        <td>{{this.total_scores}}</td>
-                                    
-                                        </tr>
-                                    {{/each}}
-                                    </tbody>
-                                    </table>
-                            </div>
-
-                            <div id="chatroom">
-                                <p>chatroom</p>
-                                <form action="" id="msgBox" class="">
-                                    <input id="m" autocomplete="off" placeholder="guess"/>
-                                    <button>Send</button>
-                                </form>
-                                <div class="chat"></div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div>
-                        <div id="color-picker">
-
-                            <i class="fas fa-circle" id="small" style="padding: 5px; font-size: 20px; padding:15px 10px 10px 20px;"></i>
-                            <i class="fas fa-circle" id="big" style="padding: 5px; font-size: 30px; padding: 10px 10px 0px 10px;"></i>
-                            <!-- <i class="fas fa-pencil-alt" style="padding: 5px; font-size: 50px;"></i> -->
-
-                            <i class="fas fa-minus" id="red" style="color: red;"></i>
-                            <i class="fas fa-minus" id="orange" style="color: orange;"></i>
-                            <i class="fas fa-minus" id="yellow" style="color: yellow;"></i>
-
-                            <i class="fas fa-minus" id="brown" style="color: #663300;"></i>
-                            <i class="fas fa-minus" id="green" style="color: #00CC00;"></i>
-                            <!-- <i class="fas fa-minus" id="dark-green" style="color: #006600; padding: 3px;"></i> -->
-
-                            <i class="fas fa-minus" id="light-blue" style="color: #73CFFA;"></i>
-                            <i class="fas fa-minus" id="blue" style="color: #0366CC;"></i>
-                            <!-- <i class="fas fa-minus" id="light-purple" style="color: #CC00CC; padding: 3px;"></i> -->
-
-                            <i class="fas fa-minus" id="light-red" style="color: #FF6666;"></i>
-                            <i class="fas fa-minus" id="purple" style="color: purple;"></i>
-                            <i class="fas fa-minus" id="lighter-purple" style="color: #FF40FF;"></i>
-
-                            <i class="fas fa-minus" id="black" style="color: black;"></i>
-                            <i class="fas fa-minus" id="white" style="color: white;"></i>
-                            <i class="fas fa-minus" id="grey" style="color: #919499;"></i>
-
-
-                            <i id="duster" style="padding-left: 20px;">
-                                <img src="./images/duster.png" height="35" width="80">
-                            </i>
-                        </div>
-                    </div>
-                </div>
+    <div class="room">
+        <div id="timerAndStart">
+            <div id="timer1">Time left =
+                <span id="timer"></span>
             </div>
+
+            <form id="button-form">
+                <input type="button" id='start' class='hide' value="START">
+                <input type="button" id='next' class='hide' value="NEXT">
+            </form>
+
+
+            <form class='hide' id='toLobbyForm' method='GET' action='/lobby'>
+                <input type='submit' id='toLobby' class='hide' value='TO LOBBY' method='GET' action='/lobby'>
+            </form>
         </div>
-    </div>
-</div> --}}
+
+        <div class="upper">
+            <div>
 
 
- <div class="draw">
+                <div id="canvas-container">
+                    <canvas id="canvas-cover" class="canvas" width='706px' height='488px'></canvas>
+                    <canvas id="canvas-real" class="canvas" width='706px' height='488px'></canvas>
+                    <canvas id="chalkboard" class="canvas" width='706px' height='488px'></canvas>
+                </div>
 
-        <div class="room">
-            <div class="upper">
-                <div>
+            </div>
 
-                    <div id="canvas-container">
-                        <canvas id="canvas-real" class="canvas" width='706px' height='488px'></canvas>
-                        <canvas id="chalkboard" class="canvas" width='706px' height='488px'></canvas>
-                    </div>
+            <div>
+
+                <div id="ranking">
+                    <img id="name" src="./images/ranking.png" width="70px" height="35px" style="margin: 5px">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Rank</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each allStats}}
+                            <tr {{#if this.owner}}style="color: #ffff;" {{/if}}>
+                                <th scope="row">{{this.index}}</th>
+                                <td> {{this.name}}</td>
+                                <td>{{this.total_scores}}</td>
+                            </tr>
+
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
 
                 <div id="chatroom">
-                    <p>chatroom</p>
+                    <img id="name" src="./images/chatroom.png" width="100px" height="35px" style="margin: 5px">
                     <form action="" id="msgBox" class="">
                         <input id="m" autocomplete="off" placeholder="guess" />
                         <button>Send</button>
                     </form>
-                </div>
-
-                <div>
-
-                    <div id="ranking">
-                        <img id="name" src="./images/ranking.png" width="70px" height="35px" style="margin: 5px">
-                        <table class="table">
-                                    <thead>
-                                        <tr>
-                                        <th scope="col">Rank</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Score</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    {{#each allStats}}
-                                        <tr {{#if this.owner}}style="color: #ffff;"{{/if}}>
-                                            <th scope="row">{{this.index}}</th>
-                                            <td> {{this.name}}</td>
-                                            <td>{{this.total_scores}}</td>
-                                        </tr>
-                                        
-                                    {{/each}}
-                                    </tbody>
-                                    </table>
-                    </div>
-
-                    <div id="chatroom">
-                        <img id="name" src="./images/chatroom.png" width="100px" height="35px" style="margin: 5px">
-                        <form action="" id="msgBox" class="">
-                            <input id="m" autocomplete="off" placeholder="guess"/>
-                            <button>Send</button>
-                        </form>
-                        <ul class="chat list-group" style="height:200px"></div>
-                    </div>
-
+                    <ul class="chat list-group" style="height:200px">
                 </div>
             </div>
 
-            <div>
-                <div id="color-picker">
-
-                    <i class="fas fa-circle" id="small" style="padding: 5px; font-size: 10px; padding:15px 10px 10px 20px;"></i>
-                    <i class="fas fa-circle" id="big" style="padding: 5px; font-size: 30px; padding: 10px 10px 0px 10px;"></i>
-                    <!-- <i class="fas fa-pencil-alt" style="padding: 5px; font-size: 50px;"></i> -->
-
-                    <i class="fas fa-minus" id="red" style="color: red;"></i>
-                    <i class="fas fa-minus" id="orange" style="color: orange;"></i>
-                    <i class="fas fa-minus" id="yellow" style="color: yellow;"></i>
-
-                    <i class="fas fa-minus" id="brown" style="color: #663300;"></i>
-                    <i class="fas fa-minus" id="green" style="color: #00CC00;"></i>
-                    <!-- <i class="fas fa-minus" id="dark-green" style="color: #006600; padding: 3px;"></i> -->
-
-                    <i class="fas fa-minus" id="light-blue" style="color: #73CFFA;"></i>
-                    <i class="fas fa-minus" id="blue" style="color: #0366CC;"></i>
-                    <!-- <i class="fas fa-minus" id="light-purple" style="color: #CC00CC; padding: 3px;"></i> -->
-
-                    <i class="fas fa-minus" id="light-red" style="color: #FF6666;"></i>
-                    <i class="fas fa-minus" id="purple" style="color: purple;"></i>
-                    <i class="fas fa-minus" id="lighter-purple" style="color: #FF40FF;"></i>
-
-                    <i class="fas fa-minus" id="black" style="color: black;"></i>
-                    <i class="fas fa-minus" id="white" style="color: white;"></i>
-                    <i class="fas fa-minus" id="grey" style="color: #919499;"></i>
-
-                    <!-- <i class="fas fa-undo" style="padding: 8px; font-size: 30px;"></i> -->
-                    <i id="duster" style="padding-left: 20px;">
-                        <img src="./images/duster.png" height="35" width="80">
-                    </i>
-                    <!-- <i class="fas fa-trash-alt" style="padding: 8px; font-size: 30px;"></i> -->
-
-                    <!-- <i class="fas fa-square-full" style="padding: 8px; font-size: 30px;"></i> -->
-
-
-                </div>
-            </div>
         </div>
+    </div>
 
+    <div>
+        <div id="color-picker" class="hide">
+
+            <i class="fas fa-circle" id="small" style="padding: 5px; font-size: 10px; padding:15px 10px 10px 20px;"></i>
+            <i class="fas fa-circle" id="big" style="padding: 5px; font-size: 30px; padding: 10px 10px 0px 10px;"></i>
+            <!-- <i class="fas fa-pencil-alt" style="padding: 5px; font-size: 50px;"></i> -->
+
+            <i class="fas fa-minus" id="red" style="color: red;"></i>
+            <i class="fas fa-minus" id="orange" style="color: orange;"></i>
+            <i class="fas fa-minus" id="yellow" style="color: yellow;"></i>
+
+            <i class="fas fa-minus" id="brown" style="color: #663300;"></i>
+            <i class="fas fa-minus" id="green" style="color: #00CC00;"></i>
+            <!-- <i class="fas fa-minus" id="dark-green" style="color: #006600; padding: 3px;"></i> -->
+
+            <i class="fas fa-minus" id="light-blue" style="color: #73CFFA;"></i>
+            <i class="fas fa-minus" id="blue" style="color: #0366CC;"></i>
+            <!-- <i class="fas fa-minus" id="light-purple" style="color: #CC00CC; padding: 3px;"></i> -->
+
+            <i class="fas fa-minus" id="light-red" style="color: #FF6666;"></i>
+            <i class="fas fa-minus" id="purple" style="color: purple;"></i>
+            <i class="fas fa-minus" id="lighter-purple" style="color: #FF40FF;"></i>
+
+            <i class="fas fa-minus" id="black" style="color: black;"></i>
+            <i class="fas fa-minus" id="white" style="color: white;"></i>
+            <i class="fas fa-minus" id="grey" style="color: #919499;"></i>
+
+            <!-- <i class="fas fa-undo" style="padding: 8px; font-size: 30px;"></i> -->
+            <i id="duster" style="padding-left: 20px;">
+                <img src="./images/duster.png" height="35" width="80">
+            </i>
+            <!-- <i class="fas fa-trash-alt" style="padding: 8px; font-size: 30px;"></i> -->
+
+            <!-- <i class="fas fa-square-full" style="padding: 8px; font-size: 30px;"></i> -->
+
+
+        </div>
+    </div>
 </div>
 
-<div>Time left =
-    <span id="timer"></span>
 </div>
-
-<script src="js/room.js"></script>
