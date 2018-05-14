@@ -1,40 +1,29 @@
 {
-  "name": "weekly-chat-room",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "bcrypt": "^2.0.1",
-    "body-parser": "^1.18.2",
-    "connect-redis": "^3.3.3",
-    "dotenv": "^5.0.1",
-    "express": "^4.16.3",
-    "express-handlebars": "^3.0.0",
-    "express-session": "^1.15.6",
-<<<<<<< 2d4b89c0b32db15a937cfa2e368dfe93eab5af14
-<<<<<<< c0cb9e5497b03e91691146933045ef31db7b8779
-    "knex": "^0.14.6",
-<<<<<<< 8ce100002587e8e480136e5f9f615f6e51e3a035
-=======
-    "nanoid": "^1.0.2",
->>>>>>> rc
-=======
-    "knex": "^0.14.6",
->>>>>>> login added to socket io
-=======
-    "nanoid": "^1.0.2",
->>>>>>> room mirror action ok
-    "passport": "^0.4.0",
-    "passport-facebook": "^2.1.1",
-    "passport-local": "^1.0.0",
-    "pg": "^7.4.3",
-    "redis": "^2.8.0",
-    "socket.io": "^2.1.0",
-    "socket.io.session": "^1.0.13"
-  }
+    "name": "weekly-chat-room",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "axios": "^0.18.0",
+        "bcrypt": "^2.0.1",
+        "body-parser": "^1.18.2",
+        "connect-redis": "^3.3.3",
+        "dotenv": "^5.0.1",
+        "express": "^4.16.3",
+        "express-handlebars": "^3.0.0",
+        "express-session": "^1.15.6",
+        "knex": "^0.14.6",
+        "passport": "^0.4.0",
+        "passport-facebook": "^2.1.1",
+        "passport-local": "^1.0.0",
+        "pg": "^7.4.3",
+        "redis": "^2.8.0",
+        "socket.io": "^2.1.0",
+        "socket.io.session": "^1.0.13"
+    }
 }
