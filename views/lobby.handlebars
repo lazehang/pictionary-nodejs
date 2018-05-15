@@ -1,46 +1,55 @@
-<div class="content container-fluid bootstrap snippets" style="margin-top:5rem">
-    <div class="row row-broken">
-        <div class="col-12 mb-2">
-            <div id="rmBtn" class="my-1">
-                <button class="joinRm btn btn-primary">rma</button>
-                <button class="joinRm btn btn-primary">rmb</button>
-            </div>
-            <button class="btn btn-danger" id="leave-room">CHECKOUT !!</button>
-        </div>
-        <div class="col-sm-12 col-xs-12 chat" style="overflow: hidden; outline: none;" tabindex="5001">
-            <div class="col-inside-lg decor-default">
-                <div class="chat-body hide">
+<link href="css/lobby.css" rel="stylesheet">
 
-                    <div id="chat-messages"></div>
-                    <form class="answer-add " id="msgBox">
-                        <input placeholder="Escriba un mensaje" id="m">
-                        <button id="send-message" class="answer-btn answer-btn-2"></button>
-                    </form>
-                </div>
+<div class="container lobby">
+    <div class="row upper"> 
+        {{> profile}}
+        <div class="col-md-7 col-sm-12 col-xs-12 booking" style="width: 600px; height: 200px">
+            <h3>Room Booking Form</h3>
+            <form id="create" method="POST" action="/room">
+                Name of Room:
+                <input id="roomName" type="text" style="margin-bottom: 10px">
+                <br> Private?
+                <input id="privateRoom" type="checkbox" name="private" style="margin-bottom: 10px">
+                <br> Password:
+                <input id="password1" type="text" name="password" placeholder="password" style="margin-bottom: 7px">
+                <br>
+                <input id="createRoom" type="submit" value="BOOK THE ROOM">
+            </form>
+        </div>
+    </div>
+
+    
+
+    <div class="row">
+        <div class="col-12 lower">
+            <div class="row room">
+                <form id="join" method="post" action="/room">
+                
+                    <div class='row singleRoom'>
+                        <div class='col-xl-6 col-sm-12'>
+                            <input id='door' value="rma" class="joinRoom" type='image' src='/images/door.jpg'>
+                            <p class="roomID">RM A</p>
+                        </div>
+                        {{!-- <div class='col-xl-6 col-sm-12'>
+                            <p class='p1name'>player1</p>
+                            <p class='p2name'>player2</p>
+                        </div> --}}
+                    </div> 
+
+                    <div class='row singleRoom'>
+                        <div class='col-xl-6 col-sm-12'>
+                            <input id='door' value="rmb" class="joinRoom" type='image' src='/images/door.jpg'>
+                            <p class="">RM B</p>
+                        </div>
+                        {{!-- <div class='col-xl-6 col-sm-12'>
+                            <p class='p1name'>player1</p>
+                            <p class='p2name'>player2</p>
+                        </div> --}}
+                    </div> 
+                    
+                </form>
             </div>
         </div>
     </div>
 </div>
 
-<!-- dev -->
-<form id="create" method="POST" action="/room">
-    <input id="customName" type="text" name="customName">customName
-    <br>
-    <input id="privateRoom" type="checkbox" name="private">Private
-    <br>
-    <input id="password" type="text" name="password" placeholder="password">Password
-    <br>
-    <input id="createRoom" type="submit">CREATE ROOM</input>
-</form>
-
-<form id="join" method="post" action="/room">
-    <input type="submit" class="joinRoom" data-roomID="someIDA" value="rma">
-    <input type="submit" class="joinRoom" data-roomID="someIDB" value="rmb">
-</form>
-
-<form id="logout" method="GET" action="/logout">
-    <button type="submit">LOGOUT</button>
-</form>
-
-<!-- mimic effect of leaving from room page -->
-<button id="leave">leave room</button>
