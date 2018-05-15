@@ -16,7 +16,7 @@ class AppService {
         });
     }
 
-    getAllStats() {
+    getAllStats(userid) {
         return new Promise((resolve, reject) => {
             this.knex('stats')
                 .join('users', 'users.id', 'stats.user_id')
@@ -25,6 +25,9 @@ class AppService {
                     var i;
                     var rank = 1;
                     for (i = 0; i < rows.length; i++) {
+                        if (rows[i]['user_id'] == userid) {
+                            rows[i]['owner'] = true;
+                        }
                         rows[i]['index'] = rank;
                         rank++;
                     }
