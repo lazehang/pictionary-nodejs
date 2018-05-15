@@ -23,12 +23,8 @@ module.exports = (express, app, io) => {
         res.redirect('/login');
     }
 
-    // router.get('/', isLoggedIn, (req, res) => {
-    //     res.redirect('/lobby');
-    // });
-
     router.get('/', (req, res) => {
-        res.redirect('/login');
+        res.redirect('/lobby');
     });
 
     router.get('/login', (req, res) => {
@@ -67,7 +63,7 @@ module.exports = (express, app, io) => {
     });
 
     router.post("/room", (req, res) => {
-        appService.getAllStats().then((allStats) => {
+        appService.getAllStats(req.user.id).then((allStats) => {
             console.log(allStats)
             res.render("room", {
                 allStats: allStats,
@@ -83,7 +79,9 @@ module.exports = (express, app, io) => {
     });
 
     router.get('/error', (req, res) => {
-        res.send('You are not logged in!');
+        res.render('login', {
+            err: 'Wrong Credentials !!'
+        })
     });
 
     router.get('/stats', isLoggedIn, (req, res) => {
@@ -99,6 +97,10 @@ module.exports = (express, app, io) => {
             });
         })
 
+    })
+
+    router.get('*', (req, res) => {
+        res.render('404');
     })
 
     return router;

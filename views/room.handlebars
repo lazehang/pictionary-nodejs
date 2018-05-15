@@ -129,13 +129,12 @@
                                     </thead>
                                     <tbody>
                                     {{#each allStats}}
-
-                                        <tr>
-                                        <th scope="row">{{this.index}}</th>
-                                        <td> {{this.name}}</td>
-                                        <td>{{this.total_scores}}</td>
-                                    
+                                        <tr {{#if this.owner}}style="color: #ffff;"{{/if}}>
+                                            <th scope="row">{{this.index}}</th>
+                                            <td> {{this.name}}</td>
+                                            <td>{{this.total_scores}}</td>
                                         </tr>
+                                        
                                     {{/each}}
                                     </tbody>
                                     </table>
