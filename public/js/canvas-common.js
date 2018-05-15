@@ -142,8 +142,6 @@ function chalkboard() {
         mouseY = evt.pageY - $("#canvas-real").offset().top;
         xLast = mouseX;
         yLast = mouseY;
-        console.log(mouseX)
-        console.log(mouseY)
         // mouseX = evt.pageX - evt.offsetLeft;
         // mouseY = evt.pageY - evt.offsetTop;
         // if (evt.button == 2) {
@@ -260,101 +258,282 @@ function chalkboard() {
 
     $("#red").click(function () {
         rgbaColor = 'rgba(255,0,0,1)';
-        draw(mouseX, mouseY);
+        $("#red").css({ 'opacity' : 0 });
+        $("#orange").css({ 'opacity' : 1 });
+        $("#yellow").css({ 'opacity' : 1 });
+        $("#brown").css({ 'opacity' : 1 });
+        $("#green").css({ 'opacity' : 1 });
+        $("#light-blue").css({ 'opacity' : 1 });
+        $("#blue").css({ 'opacity' : 1 });
+        $("#light-red").css({ 'opacity' : 1 });
+        $("#purple").css({ 'opacity' : 1 });
+        $("#lighter-purple").css({ 'opacity' : 1 });
+        $("#black").css({ 'opacity' : 1 });
+        $("#white").css({ 'opacity' : 1 });
+        $("#grey").css({ 'opacity' : 1 });
+        $("#duster").css({ 'opacity' : 1 });
     })
     $("#orange").click(function () {
         rgbaColor = 'rgba(255,179,0,1)';
-        draw(mouseX, mouseY);
+        $("#red").css({ 'opacity' : 1 });
+        $("#orange").css({ 'opacity' : 0 });
+        $("#yellow").css({ 'opacity' : 1 });
+        $("#brown").css({ 'opacity' : 1 });
+        $("#green").css({ 'opacity' : 1 });
+        $("#light-blue").css({ 'opacity' : 1 });
+        $("#blue").css({ 'opacity' : 1 });
+        $("#light-red").css({ 'opacity' : 1 });
+        $("#purple").css({ 'opacity' : 1 });
+        $("#lighter-purple").css({ 'opacity' : 1 });
+        $("#black").css({ 'opacity' : 1 });
+        $("#white").css({ 'opacity' : 1 });
+        $("#grey").css({ 'opacity' : 1 });
+        $("#duster").css({ 'opacity' : 1 });
     })
     $("#yellow").click(function () {
         rgbaColor = 'rgba(255,251,0,1)';
-        draw(mouseX, mouseY);
+        $("#red").css({ 'opacity' : 1 });
+        $("#orange").css({ 'opacity' : 1 });
+        $("#yellow").css({ 'opacity' : 0 });
+        $("#brown").css({ 'opacity' : 1 });
+        $("#green").css({ 'opacity' : 1 });
+        $("#light-blue").css({ 'opacity' : 1 });
+        $("#blue").css({ 'opacity' : 1 });
+        $("#light-red").css({ 'opacity' : 1 });
+        $("#purple").css({ 'opacity' : 1 });
+        $("#lighter-purple").css({ 'opacity' : 1 });
+        $("#black").css({ 'opacity' : 1 });
+        $("#white").css({ 'opacity' : 1 });
+        $("#grey").css({ 'opacity' : 1 });
+        $("#duster").css({ 'opacity' : 1 });
     })
     $("#brown").click(function () {
         rgbaColor = 'rgba(122,67,0,1)';
-        draw(mouseX, mouseY);
+        $("#red").css({ 'opacity' : 1 });
+        $("#orange").css({ 'opacity' : 1 });
+        $("#yellow").css({ 'opacity' : 1 });
+        $("#brown").css({ 'opacity' : 0 });
+        $("#green").css({ 'opacity' : 1 });
+        $("#light-blue").css({ 'opacity' : 1 });
+        $("#blue").css({ 'opacity' : 1 });
+        $("#light-red").css({ 'opacity' : 1 });
+        $("#purple").css({ 'opacity' : 1 });
+        $("#lighter-purple").css({ 'opacity' : 1 });
+        $("#black").css({ 'opacity' : 1 });
+        $("#white").css({ 'opacity' : 1 });
+        $("#grey").css({ 'opacity' : 1 });
+        $("#duster").css({ 'opacity' : 1 });
     })
     $("#green").click(function () {
         rgbaColor = 'rgba(0,209,0,1)';
-        draw(mouseX, mouseY);
+        $("#red").css({ 'opacity' : 1 });
+        $("#orange").css({ 'opacity' : 1 });
+        $("#yellow").css({ 'opacity' : 1 });
+        $("#brown").css({ 'opacity' : 1 });
+        $("#green").css({ 'opacity' : 0 });
+        $("#light-blue").css({ 'opacity' : 1 });
+        $("#blue").css({ 'opacity' : 1 });
+        $("#light-red").css({ 'opacity' : 1 });
+        $("#purple").css({ 'opacity' : 1 });
+        $("#lighter-purple").css({ 'opacity' : 1 });
+        $("#black").css({ 'opacity' : 1 });
+        $("#white").css({ 'opacity' : 1 });
+        $("#grey").css({ 'opacity' : 1 });
+        $("#duster").css({ 'opacity' : 1 });
     })
     $("#light-blue").click(function () {
         rgbaColor = 'rgba(131,216,251,1)';
-        draw(mouseX, mouseY);
+        $("#red").css({ 'opacity' : 1 });
+        $("#orange").css({ 'opacity' : 1 });
+        $("#yellow").css({ 'opacity' : 1 });
+        $("#brown").css({ 'opacity' : 1 });
+        $("#green").css({ 'opacity' : 1 });
+        $("#light-blue").css({ 'opacity' : 0 });
+        $("#blue").css({ 'opacity' : 1 });
+        $("#light-red").css({ 'opacity' : 1 });
+        $("#purple").css({ 'opacity' : 1 });
+        $("#lighter-purple").css({ 'opacity' : 1 });
+        $("#black").css({ 'opacity' : 1 });
+        $("#white").css({ 'opacity' : 1 });
+        $("#grey").css({ 'opacity' : 1 });
+        $("#duster").css({ 'opacity' : 1 });
     })
     $("#blue").click(function () {
         rgbaColor = 'rgba(0,125,214,1)';
-        draw(mouseX, mouseY);
+        $("#red").css({ 'opacity' : 1 });
+        $("#orange").css({ 'opacity' : 1 });
+        $("#yellow").css({ 'opacity' : 1 });
+        $("#brown").css({ 'opacity' : 1 });
+        $("#green").css({ 'opacity' : 1 });
+        $("#light-blue").css({ 'opacity' : 1 });
+        $("#blue").css({ 'opacity' : 0 });
+        $("#light-red").css({ 'opacity' : 1 });
+        $("#purple").css({ 'opacity' : 1 });
+        $("#lighter-purple").css({ 'opacity' : 1 });
+        $("#black").css({ 'opacity' : 1 });
+        $("#white").css({ 'opacity' : 1 });
+        $("#grey").css({ 'opacity' : 1 });
+        $("#duster").css({ 'opacity' : 1 });
     })
     $("#light-red").click(function () {
         rgbaColor = 'rgba(255,126,121,1)';
-        draw(mouseX, mouseY);
+        $("#red").css({ 'opacity' : 1 });
+        $("#orange").css({ 'opacity' : 1 });
+        $("#yellow").css({ 'opacity' : 1 });
+        $("#brown").css({ 'opacity' : 1 });
+        $("#green").css({ 'opacity' : 1 });
+        $("#light-blue").css({ 'opacity' : 1 });
+        $("#blue").css({ 'opacity' : 1 });
+        $("#light-red").css({ 'opacity' : 0 });
+        $("#purple").css({ 'opacity' : 1 });
+        $("#lighter-purple").css({ 'opacity' : 1 });
+        $("#black").css({ 'opacity' : 1 });
+        $("#white").css({ 'opacity' : 1 });
+        $("#grey").css({ 'opacity' : 1 });
+        $("#duster").css({ 'opacity' : 1 });
     })
     $("#purple").click(function () {
         rgbaColor = 'rgba(148,33,147,1)';
-        draw(mouseX, mouseY);
+        $("#red").css({ 'opacity' : 1 });
+        $("#orange").css({ 'opacity' : 1 });
+        $("#yellow").css({ 'opacity' : 1 });
+        $("#brown").css({ 'opacity' : 1 });
+        $("#green").css({ 'opacity' : 1 });
+        $("#light-blue").css({ 'opacity' : 1 });
+        $("#blue").css({ 'opacity' : 1 });
+        $("#light-red").css({ 'opacity' : 1 });
+        $("#purple").css({ 'opacity' : 0 });
+        $("#lighter-purple").css({ 'opacity' : 1 });
+        $("#black").css({ 'opacity' : 1 });
+        $("#white").css({ 'opacity' : 1 });
+        $("#grey").css({ 'opacity' : 1 });
+        $("#duster").css({ 'opacity' : 1 });
     })
     $("#lighter-purple").click(function () {
         rgbaColor = 'rgba(255,101,255,1)';
-        draw(mouseX, mouseY);
+        $("#red").css({ 'opacity' : 1 });
+        $("#orange").css({ 'opacity' : 1 });
+        $("#yellow").css({ 'opacity' : 1 });
+        $("#brown").css({ 'opacity' : 1 });
+        $("#green").css({ 'opacity' : 1 });
+        $("#light-blue").css({ 'opacity' : 1 });
+        $("#blue").css({ 'opacity' : 1 });
+        $("#light-red").css({ 'opacity' : 1 });
+        $("#purple").css({ 'opacity' : 1 });
+        $("#lighter-purple").css({ 'opacity' : 0 });
+        $("#black").css({ 'opacity' : 1 });
+        $("#white").css({ 'opacity' : 1 });
+        $("#grey").css({ 'opacity' : 1 });
+        $("#duster").css({ 'opacity' : 1 });
     })
     $("#black").click(function () {
         rgbaColor = 'rgba(0,0,0,1)';
-        draw(mouseX, mouseY);
+        $("#red").css({ 'opacity' : 1 });
+        $("#orange").css({ 'opacity' : 1 });
+        $("#yellow").css({ 'opacity' : 1 });
+        $("#brown").css({ 'opacity' : 1 });
+        $("#green").css({ 'opacity' : 1 });
+        $("#light-blue").css({ 'opacity' : 1 });
+        $("#blue").css({ 'opacity' : 1 });
+        $("#light-red").css({ 'opacity' : 1 });
+        $("#purple").css({ 'opacity' : 1 });
+        $("#lighter-purple").css({ 'opacity' : 1 });
+        $("#black").css({ 'opacity' : 0 });
+        $("#white").css({ 'opacity' : 1 });
+        $("#grey").css({ 'opacity' : 1 });
+        $("#duster").css({ 'opacity' : 1 });
     })
     $("#white").click(function () {
         rgbaColor = 'rgba(255,255,255,1)';
-        draw(mouseX, mouseY);
+        $("#red").css({ 'opacity' : 1 });
+        $("#orange").css({ 'opacity' : 1 });
+        $("#yellow").css({ 'opacity' : 1 });
+        $("#brown").css({ 'opacity' : 1 });
+        $("#green").css({ 'opacity' : 1 });
+        $("#light-blue").css({ 'opacity' : 1 });
+        $("#blue").css({ 'opacity' : 1 });
+        $("#light-red").css({ 'opacity' : 1 });
+        $("#purple").css({ 'opacity' : 1 });
+        $("#lighter-purple").css({ 'opacity' : 1 });
+        $("#black").css({ 'opacity' : 1 });
+        $("#white").css({ 'opacity' : 0 });
+        $("#grey").css({ 'opacity' : 1 });
+        $("#duster").css({ 'opacity' : 1 });
     })
     $("#grey").click(function () {
         rgbaColor = 'rgba(162,165,169,1)';
-        draw(mouseX, mouseY);
+        $("#red").css({ 'opacity' : 1 });
+        $("#orange").css({ 'opacity' : 1 });
+        $("#yellow").css({ 'opacity' : 1 });
+        $("#brown").css({ 'opacity' : 1 });
+        $("#green").css({ 'opacity' : 1 });
+        $("#light-blue").css({ 'opacity' : 1 });
+        $("#blue").css({ 'opacity' : 1 });
+        $("#light-red").css({ 'opacity' : 1 });
+        $("#purple").css({ 'opacity' : 1 });
+        $("#lighter-purple").css({ 'opacity' : 1 });
+        $("#black").css({ 'opacity' : 1 });
+        $("#white").css({ 'opacity' : 1 });
+        $("#grey").css({ 'opacity' : 0 });
+        $("#duster").css({ 'opacity' : 1 });
     })
 
-
-    //changeLineWidth
+    //change chalk size and cursor
 
     $("#small").click(function () {
         brushDiameter = 10;
+        $('.canvas').css( 'cursor', 'url(images/smallSize.png) 9 9, auto');
     })
     $("#big").click(function () {
         brushDiameter = 30;
+        $('.canvas').css( 'cursor', 'url(images/bigSize.png) 26 26, auto');
     })
 
     //duster
 
     $("#duster").click(function () {
-        console.log("duster1");
         rgbaColor = 'rgba(255,255,255,0)';
+        $("#red").css({ 'opacity' : 1 });
+        $("#orange").css({ 'opacity' : 1 });
+        $("#yellow").css({ 'opacity' : 1 });
+        $("#brown").css({ 'opacity' : 1 });
+        $("#green").css({ 'opacity' : 1 });
+        $("#light-blue").css({ 'opacity' : 1 });
+        $("#blue").css({ 'opacity' : 1 });
+        $("#light-red").css({ 'opacity' : 1 });
+        $("#purple").css({ 'opacity' : 1 });
+        $("#lighter-purple").css({ 'opacity' : 1 });
+        $("#black").css({ 'opacity' : 1 });
+        $("#white").css({ 'opacity' : 1 });
+        $("#grey").css({ 'opacity' : 1 });
+        $("#duster").css({ 'opacity' : 0 });
         // duster(mouseX, mouseY);
-        function duster(x, y) {
-            console.log("duster2");          
-            ctx.strokeStyle = rgbaColor;
-            ctx.lineWidth = brushDiameter;
-            ctx.beginPath();
-            ctx.moveTo(xLast, yLast);
-            ctx.lineTo(x, y);
-            ctx.stroke();
+        // function duster(x, y) {
+        //     console.log("duster2");          
+        //     ctx.strokeStyle = rgbaColor;
+        //     ctx.lineWidth = brushDiameter;
+        //     ctx.beginPath();
+        //     ctx.moveTo(xLast, yLast);
+        //     ctx.lineTo(x, y);
+        //     ctx.stroke();
     
-            // Chalk Effect
-            let length1 = Math.round(Math.sqrt(Math.pow(x - xLast, 2) + Math.pow(y - yLast, 2)) / (5 / brushDiameter));
-            let xUnit1 = (x - xLast) / length1;
-            let yUnit1 = (y - yLast) / length1;
-            for (let i = 0; i < length1; i++) {
-                let xCurrent1 = xLast + (i * xUnit1);
-                let yCurrent1 = yLast + (i * yUnit1);
-                let xRandom1 = xCurrent1 + (Math.random() - 0.5) * brushDiameter;
-                let yRandom1 = yCurrent1 + (Math.random() - 0.5) * brushDiameter;
-                ctx.clearRect(xRandom1, yRandom1, Math.random() * 3 + 2, Math.random() + 1);
-            }
+        //     // Chalk Effect
+        //     let length1 = Math.round(Math.sqrt(Math.pow(x - xLast, 2) + Math.pow(y - yLast, 2)) / (5 / brushDiameter));
+        //     let xUnit1 = (x - xLast) / length1;
+        //     let yUnit1 = (y - yLast) / length1;
+        //     for (let i = 0; i < length1; i++) {
+        //         let xCurrent1 = xLast + (i * xUnit1);
+        //         let yCurrent1 = yLast + (i * yUnit1);
+        //         let xRandom1 = xCurrent1 + (Math.random() - 0.5) * brushDiameter;
+        //         let yRandom1 = yCurrent1 + (Math.random() - 0.5) * brushDiameter;
+        //         ctx.clearRect(xRandom1, yRandom1, Math.random() * 3 + 2, Math.random() + 1);
+        //     }
     
-            xLast = x;
-            yLast = y;
-            console.log("duster3");
-        }
-        duster(mouseX, mouseY);
-
-
+        //     xLast = x;
+        //     yLast = y;
+        //     console.log("duster3");
+        // }
+        // duster(mouseX, mouseY);
     })
 
 
@@ -364,6 +543,8 @@ function chalkboard() {
     $(".upper").offset({ top: 50, left: 50 })
     $("#color-picker").offset({ top: 540, left: 50 })
     $(".room").offset({ top: 90, left: 150 })
+
+
 
 }
 

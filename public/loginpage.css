@@ -44,7 +44,8 @@ body {
   width: 8vw;
   height: 8vw;
   transition: transform .2s;
-  margin-top: 6px;
+  margin-left: 3vw;
+  margin-right: 3vw;
 }
 
 input:hover {

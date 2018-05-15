@@ -4,6 +4,9 @@
     justify-content: space-between;
     flex-direction: row;
 }
+ .profile {
+    background-color: #CBE9F8;
+ }
 
 .profile > img {
     margin: 30px;

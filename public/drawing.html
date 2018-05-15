@@ -11,6 +11,8 @@
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P"
         crossorigin="anonymous">
+
+
     <link rel="stylesheet" href="./drawing.css">
 </head>
 
@@ -45,7 +47,7 @@
             <div>
                 <div id="color-picker">
 
-                    <i class="fas fa-circle" id="small" style="padding: 5px; font-size: 20px; padding:15px 10px 10px 20px;"></i>
+                    <i class="fas fa-circle" id="small" style="padding: 5px; font-size: 10px; padding:15px 10px 10px 20px;"></i>
                     <i class="fas fa-circle" id="big" style="padding: 5px; font-size: 30px; padding: 10px 10px 0px 10px;"></i>
                     <!-- <i class="fas fa-pencil-alt" style="padding: 5px; font-size: 50px;"></i> -->
 
@@ -92,6 +94,12 @@
         crossorigin="anonymous"></script>
     <script type='text/javascript' src="./js/canvas-common.js"></script>
     <script type='text/javascript'>
+    $('#small').click(function() {
+        $('.canvas').css( 'cursor', 'url(images/smallSize.png)');
+    })
+    $('#big').click(function() {
+        $('canvas').css( 'cursor', 'url(images/bigSize.png)');
+    })
     </script>
 
 </body>

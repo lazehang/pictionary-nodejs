@@ -19,7 +19,8 @@
     /* background-color: #33655A; */
     opacity: 1;
     position: absolute;
-    cursor: url(images/chalk.png), auto;
+    cursor: url(images/smallSize.png) 9 9, auto;
+    /* cursor: url(images/bigSize.png) 26 26, auto; */
     z-index: 2;
     border-radius: 8px 0px 0px 8px;
 }
