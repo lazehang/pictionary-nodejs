@@ -512,7 +512,7 @@ function chalkboard() {
 
     socket.on('receive guess', function (data) {
         // console.log(data)
-        $('#chatroom').append($('<p>').text(data));
+        $('.chat').append($('<li style="color: #ffffff;">').text(data));
     });
 
     // === game logic ===
